@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> -->
+    <!-- <link href="http://yun1.janesi.net/web-test/zhiquFuli/css/prenticeProfile.css" rel="stylesheet" /> -->
+    <link href="./prenticeProfile.css" rel="stylesheet" />
+
+    <link href="http://yun.janesi.net/web/share/ranking/css/mui.min.css" rel="stylesheet" />
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>徒弟</title>
+</head>
+
+<body style="line-height: normal">
+
+    <div class="p_wrapper" id="k_wrapper">
+        <div class="header" id="k_header">
+
+            <div class="headerBG">
+                <img class="headerRightIcon" src="./source/welfare_apprentices_gold_bg@2x.png" />
+                <div class="coin">
+                    <p class="jiahao">+
+                        <span class="count"></span>
+                    </p>
+                    <p class="additional"> 今日徒弟贡献金币 </p>
+                </div>
+            </div>
+            <div class="headFooter">
+                <div class="todayGrow footer">
+                    <p class="jiahao">+
+                        <span class="count"></span>
+                    </p>
+                    <p class="additional">今日徒弟(人)</p>
+                </div>
+                <div class="sumGrow footer">
+                    <p class="count"></p>
+                    <p class="additional">累计徒弟(人)</p>
+                </div>
+                <div class="sumCoin footer">
+                    <p class="count"></p>
+                    <p class="additional">累计贡献(金币)</p>
+                </div>
+            </div>
+
+            <div class="footerLine" id="k_footerLine"></div>
+        </div>
+        <div class="container" id="k_container">
+            <div class="mui-content" id="k_mui-content">
+                <div id="slider" class="mui-slider">
+                    <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                        <div class="mui-control-item mui-active" onclick="clickSegmentAction(this.id)" id="leftSegment">
+                            全部徒弟
+                        </div>
+                        <div class="mui-control-item" onclick="clickSegmentAction(this.id)" id="rightSegment">
+                            贡献榜
+                        </div>
+                    </div>
+                    <div id="sliderProgressBar1" class="mui-slider-progress-bar1 mui-col-xs-11">
+                        <div id="sliderLine" class="sliderLine">
+                        </div>
+                    </div>
+                    <div class="mui-slider-group" style="transform: none" id="k_mui-slider-group">
+                        <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                            <div id="scroll1" class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <ul class="mui-table-view" id="itemTableView1">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="item2mobile" class="mui-slider-item mui-control-content">
+                            <div id="scroll2" class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <ul class="mui-table-view" id="itemTableView2">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="http://yun.janesi.net/web-test/zhiqu-web/js/jquery-2.1.1.min.js"></script>
+<!-- <script src="http://yun.janesi.net/web-test/zhiqu-web/js/mui.min.js"></script> -->
+
+<script>
+    // (function ($) {
+    //     $('.mui-scroll-wrapper').scroll({
+    //         indicators: true //是否显示滚动条
+    //     });
+    //     var item2 = document.getElementById('item2mobile');
+    //     var item3 = document.getElementById('item3mobile');
+    //     var item2Show = false,
+    //         item3Show = false; //子选项卡是否显示标志
+
+    //     var sliderLine = document.getElementById('sliderLine');
+
+    //     document.querySelector('.mui-slider').addEventListener('slide', function (event) {
+
+    //         if (event.detail.slideNumber === 0 && !item2Show) {
+
+    // sliderLine.style.animation = '';
+    // sliderLine.style.animation = 'moveLeft 0.4s ease 1';
+    // sliderLine.style.animationFillMode = 'both';
+    //             fetchData(0, false);
+
+    //         } else if (event.detail.slideNumber === 1 && !item3Show) {
+
+    // sliderLine.style.animation = '';
+    // sliderLine.style.animation = 'moveRight 0.4s ease 1';
+    // sliderLine.style.animationFillMode = 'both';
+    //             fetchData(1, false);
+    //         }
+    //     })
+    // })(mui);
+    // 定义公共参数：
+
+
+    function clickSegmentAction(segmentId) {
+
+        var leftSegment = document.getElementById("leftSegment");
+        var rightSegment = document.getElementById("rightSegment");
+        var sliderLine = document.getElementById('sliderLine');
+
+        var item1mobile = document.getElementById("item1mobile");
+        var item2mobile = document.getElementById("item2mobile");
+        if (segmentId == 'leftSegment') {
+
+            item2mobile.style.display = 'none';
+            item1mobile.style.display = 'inline';
+            if (!leftSegment.className.match('mui-active')) {
+
+                leftSegment.classList.add('mui-active');
+            }
+            rightSegment.classList.remove('mui-active');
+            sliderLine.style.animation = '';
+            sliderLine.style.animation = 'moveLeft 0.4s ease 1';
+            sliderLine.style.animationFillMode = 'both';
+            fetchData(0, false);
+        } else {
+
+            item2mobile.style.display = 'inline';
+            item1mobile.style.display = 'none';
+            if (!rightSegment.className.match('mui-active')) {
+
+                rightSegment.classList.add('mui-active');
+            }
+            leftSegment.classList.remove('mui-active');
+            sliderLine.style.animation = '';
+            sliderLine.style.animation = 'moveRight 0.4s ease 1';
+            sliderLine.style.animationFillMode = 'both';
+            fetchData(1, false);
+        }
+    }
+
+    let url = 'http://10.10.11.41';
+    var appId = '10010';
+    var userId = '968';
+    // 获取公参：
+    // window.android.updateRemark("ok");
+
+    function publicListParams(listPara) {
+        var val = JSON.parse(listPara)
+        appId = val.appId;
+        userId = val.userId;
+    };
+
+    function getSummary() {
+        $.ajax({
+            type: 'post',
+            data: {
+                userId: userId,
+                appId: appId
+            },
+            url: url + '/app/interest/invite/summary',
+            success: function (res) {
+                console.log(res.result.contribution);
+                var cont = [];
+                cont = document.querySelectorAll('.count')
+                cont[0].innerHTML = res.result.dayContribution;
+                cont[1].innerHTML = res.result.dayInvite;
+                cont[2].innerHTML = res.result.inviteCount;
+                cont[3].innerHTML = res.result.contribution;
+            }
+        })
+    }
+
+
+
+    fetchData(0, false);
+    window.onload = function () {
+
+        // var maxHeight = window.screen.availHeight;
+        // var wrapper = document.getElementById("k_wrapper");
+        // var container = document.getElementById("k_container");
+        // var mui_content = document.getElementById("k_mui-content");
+        // var k_mui_slider_group = document.getElementById("k_mui-slider-group");
+        // wrapper.style.height = maxHeight + 'px';
+        // mui_content.style.height = container.offsetHeight + 'px';
+        // var vaHeight = k_mui_slider_group.offsetHeight + 'px';
+        // var list = document.getElementsByClassName("mui-control-content");
+        // console.log('vaHeight', vaHeight);
+        // for (i = 0; i < list.length; i++) {
+
+        //     var model = list[i];
+        //     model.style.minHeight = vaHeight;
+
+        // }
+    }
+
+    function fetchData(index, isLoadMore) {
+
+        var ul = document.getElementById(index == 0 ? "itemTableView1" : "itemTableView2");
+        console.log('ul', ul);
+        var list = ul.getElementsByTagName('li');
+        var url = index == 0 ? 'http://118.25.10.151:8090/app/interest/invite/apprentice_list' :
+            'http://10.10.11.41:8090/app/interest/apprentice/contribution_list'
+        if (list.length > 0) return;
+        $.ajax({
+            type: 'post',
+            data: {
+                userId: userId,
+                appId: appId
+            },
+            url: url,
+            success: function (res) {
+
+                if (res.result.length <= 0) {
+
+                    if (isLoadMore) return;
+                    if (index == 0) {
+
+                        ul.innerHTML = '<div class = "empty" id = "k_empty1">' +
+                            '<div class = "emptyBG">' + '</div>' +
+                            '<div class = "emptyTopString">' + '50%以上的用户在看点头条靠徒儿进贡' + '</div>' +
+                            '<p class = "emptyLeftString">' + '躺着赚零花钱，' +
+                            '<span class ="emptyRigString">' + '立即去收徒>>' + '</span>' + '</p>'
+                        '</div>';
+                    } else {
+
+                        ul.innerHTML = '<div class = "empty" id = "k_empty2">' +
+                            '<div class = "emptyBG ranking">' + '</div>' +
+                            '<div class = "emptyTopString">' + '50%以上的用户在看点头条靠徒儿进贡' + '</div>' +
+                            '<p class = "emptyLeftString">' + '躺着赚零花钱，' +
+                            '<span class ="emptyRigString">' + '立即去收徒>>' + '</span>' + '</p>'
+                        '</div>';
+                    }
+                    var k_empty = document.getElementById(index == 0 ? "k_empty1" : "k_empty2");
+                    var k_mui_slider_group = document.getElementById("k_mui-slider-group");
+                    var vaHeight = k_mui_slider_group.offsetHeight + 'px';
+                    console.log("hei", vaHeight)
+                    k_empty.style.height = vaHeight;
+                } else {
+                    reloadRowWithData(res, index);
+                }
+            }
+        });
+    }
+
+    function reloadRowWithData(res, index) {
+
+        var ul = document.getElementById(index == 0 ? "itemTableView1" : "itemTableView2");
+        var list = ul.getElementsByTagName('li');
+        if (list.length > 0) {
+            return;
+        }
+        var array = res.result.concat(res.result);
+        for (var i = 0; i < array.length; i++) {
+            var model = array[i];
+            var li = document.createElement('li');
+            var url = 'http://yun.janesi.net/web_browser/img/bubble.png'
+            if (index == 0) {
+
+                li.innerHTML =
+                    '<div class="row">' +
+                    '<img class = "avatar" />' +
+                    '<div class="nameMobile">' +
+                    '<p class = "name">' + model.nickName + '</p>' +
+                    '<p class = "mobile">' + model.phone + '</p>' +
+                    '</div>' +
+                    '<div class="sumGrow">' +
+                    '<div class = "sumCount">' +
+                    '<img class = "icon" src = "./source/coinIcon@2x.png" />' +
+                    '<p class = "jiahao">' + "+" + '<span class = "count">' + model.contribution + '</span>' +
+                    '</p>' +
+                    '</div>' +
+                    '<p class = "addition">' + '今日贡献' + '</p>' +
+                    '</div>' +
+                    '<div class = "line" />'
+
+                '</div>';
+            } else {
+
+                li.innerHTML =
+                    '<div class="row">' +
+                    '<div class = order isRanking>' + (i + 1) + '</div>' +
+                    '<img class = "avatar isRanking" />' +
+                    '<div class="nameMobile">' +
+                    '<p class = "name">' + model.nickName + '</p>' +
+                    '<p class = "mobile">' + model.phone + '</p>' +
+                    '</div>' +
+                    '<div class="sumGrow">' +
+                    '<div class = "sumCount">' +
+                    '<img class = "icon" src = "./source/coinIcon@2x.png" />' +
+                    '<p class = "jiahao">' + "+" + '<span class = "count">' + model.contribution + '</span>' +
+                    '</p>' +
+                    '</div>' +
+                    '<p class = "addition">' + '累计贡献' + '</p>' +
+                    '</div>' +
+                    '<div class = "line" />'
+
+                '</div>';
+            }
+
+
+            ul.appendChild(li);
+            var img = document.getElementsByClassName('avatar')[0];
+            img.setAttribute("src", url);
+        }
+    }
+</script>
+
+</html>

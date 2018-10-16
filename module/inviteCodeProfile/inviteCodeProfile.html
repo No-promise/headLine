@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <link href="http://yun.janesi.net/web/share/ranking/css/mui.min.css" rel="stylesheet" />
+     <link rel="stylesheet" href="http://yun1.janesi.net/web-test/zhiquFuli/css/inviteCodeProfile.css"> 
+     <!-- <link href="./inviteCodeProfile.css" rel="stylesheet" />  -->
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>什么是邀请码</title>
+</head>
+
+<body style="line-height: normal">
+
+    <div class="i_container">
+        <div class="I_wrapper">
+            <div class="whatIsInviteCode">
+                <div class="img1Bg">
+                    <div class="img1StringBG">
+                        <p class="img1String">什么是邀请码？</p>
+                        <p class="img1String2">邀请码是 看点头条用户的身份标识,</p>
+                        <p class="img1String2">可在邀请收徒时使用</p>
+                    </div>
+                    <img class="img1" src="http://yun1.janesi.net/web-test/zhiquFuli/icon/code-bbg.png">
+                </div>
+
+                <div class="img2Bg" onclick="copyAction()">
+                    <div class="inviteCode">
+                        <img class="img2" src="http://yun1.janesi.net/web-test/zhiquFuli/icon/code_click_bg.png">
+                        <div class="codeNum">
+                            <p id="k_codeNum"></p>
+                        </div>
+                    </div>
+                    <div class="img2String">
+                        <p class="clickToCopy"> &nbsp;点击复制您的邀请码&nbsp; </p>
+                    </div>
+
+                </div>
+                <div class="line"> </div>
+                <div class="howToUseCode">
+
+                    <p class="img1String second">什么是邀请码？</p>
+                    <div class="stringBg">
+                        <p class="img1String2">1.通过分享邀请链接给朋友在线注册，或面对面扫码注册时自动绑定您的邀请码，不需要徒弟手动输入。</p>
+                    </div>
+                    <img class="img3" src="http://yun1.janesi.net/web-test/zhiquFuli/icon/pic_01.png">
+                    <div class="stringBg">
+                        <p class="img1String2">2.若您的好友是通过手机应用商店搜索“看点头条”安装注册的，需登录后输入您的邀请码后才能成为您的徒弟。</p>
+                    </div>
+                    <img class="img4" src="http://yun1.janesi.net/web-test/zhiquFuli/icon/pic_02.png">
+
+                </div>
+            </div>
+            <div class="bottomContainer"></div>
+        </div>
+        <div class="footerBtn">
+            <a href="#share">
+                <div class="btn" id="shareAction">分享</div>
+            </a>
+        </div>
+    </div>
+    <!--底部弹框  -->
+    <div id="share" class="mui-popover mui-popover-action mui-popover-bottom">
+        <div class="mui-table-view aa mui-table-view-cell">
+            <div class="bott">
+                <div>
+                    <div class="shares weChat " name="weChat">
+                        <img src="http://yun1.janesi.net/web-test/zhiquFuli/icon/welfare_apprentice_share_weixin@2x.png" alt="" />
+                    </div>
+                    <span>微信</span>
+                </div>
+                
+                <div>
+                    <div class="shares QQ" name="QQ">
+                        <img src="http://yun1.janesi.net/web-test/zhiquFuli/icon/video_share_qq@2x.png" alt="" />
+                    </div>
+                    <span>QQ</span>
+                </div>
+            </div> 
+        </div>
+        <ul class="mui-table-view" >
+            <li class="mui-table-view-cell" style="border-radius:0;height:1.2rem;line-height:1.5rem">
+                <a href="#share" id="cancel">
+                    <span >取消</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</body>
+<script src="http://yun.janesi.net/web-test/zhiqu-web/js/jquery-2.1.1.min.js"></script>
+<script src="http://yun.janesi.net/web-test/zhiqu-web/js/mui.min.js"></script>
+
+<script>
+    function copyAction() {
+        console.log(111);
+
+        var k_codeNum = document.getElementById('k_codeNum');
+        var text1 = k_codeNum.innerHTML;
+        if (text1.length < 1) return;
+        var oInput = document.createElement('input');
+        oInput.value = text1;
+        oInput.setAttribute('readOnly', 'readOnly');
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        oInput.setSelectionRange(0, oInput.value.length);
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display = 'none';
+        var mut = mui.toast('复制成功', {
+            duration: 'short',
+            type: 'div'
+        });
+        console.log(mut);
+    }
+
+    
+    var url = 'http://118.25.10.151:8090';
+    var appId = '10010';
+    var userId = '968';
+    // 获取公参：
+    window.android.updateRemark("ok");
+
+    function publicListParams(listPara) {
+        var val = JSON.parse(listPara)
+        appId = val.appId;
+        userId = val.userId;
+        url = val.url;
+        fetData();
+    };
+
+    function fetData() {
+        $.ajax({
+            type: 'post',
+            data: {
+                userId: userId,
+                appId: appId,
+            },
+            url: url + '/app/interest/invite/summary',
+            success: function (res) {
+
+                if (res.code == 0) {
+
+                    var k_codeNum = document.getElementById('k_codeNum');
+                    k_codeNum.innerText = res.result.inviteCode;
+                }
+            }
+        })
+    }
+
+// 分享
+// $("#shareAction").on("click", function () {
+
+    //     alert("share");
+    // });
+mui('.bott').on('tap', '.weChat', function(){
+     window.android.shiTuShareAndroid("weChat");
+    // console.log(111)
+})
+mui('.bott').on('tap', '.QQ', function(){
+     window.android.shiTuShareAndroid("QQ");
+    // console.log(222)
+     	
+})
+
+</script>
+
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>师徒</title>
+      
+      <link rel="stylesheet" href="../css/mui.min.css">  
+    <link rel="stylesheet" href="../css/swiper-4.2.6.min.css">
+    <link rel="stylesheet" href="../css/teacherAndPupil.css ">  
+    <script>
+      //声明_czc对象:
+      var _czc = _czc || [];
+      //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+      _czc.push(["_setAccount", "1273878911"]);
+    </script>
+</head>
+
+<body style="display:none;">
+    <!--弹框  新手引导  -->
+    <div class="newGuide">
+        <img  src="../icon/tips_apprentice.png" alt="" onclick="newClose()">
+    </div>
+    <!--弹框 没有红包时  -->
+    <div class="alert_noneBag">
+        <img class="closeButtn" src="../icon/welfare_apprentice_close@2x.png" alt="" onclick="closeBtn()">
+        <div class="alert_bgNone">
+            <p class="noneTitle">哎呀，没有红包啦！</p>
+            <p class="noneTip">每收一徒，<span class="redNoneTip">8元</span>轻松到手</p>
+            <img class="noneImg" src="../icon/welfare_apprentice_reward_none@2x.png" alt="">
+            <a href="#share"> 
+                <div class="noneBtn">
+                    我要分享赚钱
+                </div>
+            </a> 
+        </div>
+    </div>
+    <!--弹框 领取红包  有红包 -->
+     <div id="alert_active">
+         <img class="closeButtn" src="../icon/welfare_apprentice_close@2x.png" alt="" onclick="closeBtn()">
+        <div class="alert_img">
+            
+            <img src="../icon/welfare_apprentice_reward_tanchuang@2x.png" alt="">
+             <p class="alert_title">收徒奖励</p>
+            <p class="alert_money"><span class="getMoey">2.00</span><span class="alert_small">元</span></p>
+            <div class="alert_tip">已存入钱包</div>
+            <p class="statusNum">还有 <sapn class="numberBags">0</sapn> 个</p>
+            <p class="statusNone">红包已领完，收徒去赚钱</p>            
+            <div class="alert_getBtn">
+                继续领取
+            </div> 
+            <a href="#share"> 
+                <div class="alert_makeBtn">
+                    继续赚钱
+                </div>
+            </a>
+        </div>
+    </div> 
+    <!--banner start  -->
+    <div id="topHeader">
+        <div class="swiper-container banner">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide justOnePic">
+                    <img class="teacherOne" src="../icon/welfare_apprentice_bbg.png" >
+                    <!--banner定位  -->
+                    <p class="reward">收徒奖励<span class="eightNum">8</span>元
+                    </p>
+                    <div class="myPupil"><span>我的</span><br>徒弟</div>
+                    <div class="makeMoney">赚钱攻略</div>
+                    <div class="bannerTip">
+                        <p>徒弟每天还额外贡献金币（无上限）</p>
+                    </div>
+                    <a href="#share">
+                        <img class="disciple" src="../icon/welwfar_apprentice_atn@2x.png" >
+                    </a>
+                    <p class="invitation">我的邀请码&nbsp;
+                        <span class="inviteNum"></span>
+                        >>
+                    </p>
+                </div>
+                <!--lunbo  -->
+                <!-- <div class="swiper-slide">
+                <img class="teacherTwo" src="../icon/welfare_apprentice_bbg.png" >
+            </div> -->
+            </div>
+        </div>
+        <!--领取红包活动  -->
+         <div class="main_activity">
+            <img src="../icon/welfare_apprentice_reward_hongbao@2x.png" alt="">
+            <div class="activity_text">
+                <p>收徒奖励</p>
+                <p class="stateMore">你有<span class="redBagNum">0</span>个红包待领取</p>
+                <p class="stateLess">收徒成功后<span class="redFont">领现金</span></p>
+            </div>
+             <div class="activity_btnMore" onclick="btnMore(this)">
+                领取
+            </div> 
+             <div class="activity_btnLess">
+                领取
+            </div> 
+        </div> 
+        <!-- <div class="mainner">
+            <div class="mainLeft">
+                <p class="allDisciple">全部徒弟</p>
+                <p class="todayReveive">今日
+                     <span style="color:#FD4844;font-size:18px;">+</span> 
+                    <span class="plusPeople">0</span>
+                    <span style="color:#FD4844;font-size:14px;">人</span>
+                </p>
+            </div>
+            <div class="mainRight">
+                <p class="allDisciple">徒弟贡献</p>
+                <p class="todayContribute">今日
+                     <span style="color:#FD4844;font-size:18px;">+</span> 
+                    <span class="plusNumber">0</span>
+                    <span style="color:#FD4844;font-size:14px;">金币</span>
+                </p>
+            </div>
+        </div> -->
+        <div class="grayShadow"></div>
+    </div>
+
+    <div id="content-three">
+        <div class="segmentTabBg">
+
+            <div class="segmentOne textCommon mui-active" id="k_segmentOne" onclick="clickSegmentAction(this.id)">
+                奖励说明
+                <span class="barActive"></span>
+            </div>
+            <div class="segmentTwo textCommon" id="k_segmentTwo" onclick="clickSegmentAction(this.id)">
+                排行榜
+                <span class="barActive"></span>
+            </div>
+            <div class="segmentThree textCommon" id="k_segmentThree" onclick="clickSegmentAction(this.id)">
+                徒弟贡献说明
+                <span class="barActive"></span>
+            </div>
+        </div>
+        <div class="segmentContainer">
+
+            <div class="segmentOneContent" id="k_segmentOneContent">
+                <div class="instruction">
+                    <p class="question">每收一位徒弟，8元怎么奖？</p>
+                    <p class="answer">徒弟需连续7天并每天有效阅读4篇文章,</p>
+                    <p class="answer">以及绑定微信，您即可获得当天相应奖励</p>
+                </div>
+                <ul class="squer">
+                    <li>
+                        <img class="squerGift" src="../icon/welfare_apprentice_hongbao2.png" >
+                        <p class="money">0.5元</p>
+                    </li>
+                    <li>
+                        <img class="squerGift" src="../icon/welfare_apprentice_hongbao2.png" >
+                        <p class="money">0.5元</p>
+                    </li>
+                    <li>
+                        <img class="squerGift" src="../icon/welfare_apprentice_hongbao2.png" >
+                        <p class="money">1.5元</p>
+                    </li>
+                    <li>
+                        <img class="squerGift" src="../icon/welfare_apprentice_hongbao2.png" >
+                        <p class="money">0.5元</p>
+                    </li>
+                    <li>
+                        <img class="squerGift" src="../icon/welfare_apprentice_hongbao2.png" >
+                        <p class="money">1.5元</p>
+                    </li>
+                    <li>
+                        <img class="squerGift" src="../icon/welfare_apprentice_hongbao2.png" >
+                        <p class="money">0.5元</p>
+                    </li>
+                    <li>
+                        <img class="squerGift" src="../icon/welfare_apprentice_hongbao2.png" >
+                        <p class="money">最高4元</p>
+                    </li>
+                </ul>
+                <div class="tipDay">
+                    <ul class="dayData">
+                        <li>
+                            <p class="day">第1天</p>
+                        </li>
+                        <li>
+                            <p class="day">第2天</p>
+                        </li>
+                        <li>
+                            <p class="day">第3天</p>
+                        </li>
+                        <li>
+                            <p class="day">第4天</p>
+                        </li>
+                        <li>
+                            <p class="day">第5天</p>
+                        </li>
+                        <li>
+                            <p class="day">第6天</p>
+                        </li>
+                        <li>
+                            <p class="day">第7天</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="withdrawal">
+                    <p class="withdraFont">提现金额：
+                        <span id="eightNum1" class="redFont">0</span>
+                        <span class="redFont">元</span>
+                    </p>
+                    <div class="withdrawBtn">
+                        <div>立即提现</div>
+                    </div>
+                </div>
+                 <hr / style="display:none"> 
+                <div class="receiveGift" style="display:none">
+                    <img id="redGift" src="../icon/welfare_apprentice_888yuan@2x.png" >
+                </div>
+                <div class="introduce" style="display:none">
+                    <p class="question">现金大奖，888怎么拿？</p>
+                    <p class="answer">8元现金奖励只是日常奖励，还有888元现</p>
+                    <p class="answer">金奖励等你来拿
+                        <span class="redFont">点击链接去领取>></span>
+                    </p>
+                </div>
+                <div class="grayShadow"></div>
+                <!--  -->
+                <div class="discipleTrick">
+                    <p class="question">收徒小窍门</p>
+                    <p class="answer" style="margin-bottom:0.5866rem;">收徒成功率提升200%</p>
+                    <div class="leftTip">
+                        <div class="borderTip">1</div>
+
+                        <p class="answers leftTip" >
+                            邀请您的家人、朋友、同学、同事成功率最高，被邀请人也可获得
+                            <span class="redFont">现金红包奖励</span>哦
+                        </p>
+                    </div>
+                    <div class="leftTip">
+                        <div class="borderTip">2</div>
+                        <p class="answers" >
+                            分享到3个以上微信群/QQ群成功收徒的几率提升
+                            <span class="redFont" >200%</span>。
+                        </p>
+                    </div> 
+                    <div class="leftTip">
+                        <div class="borderTip">3</div>
+                        <p class="answers" >
+                            可以告诉您的朋友：注册即可领现金红包，还可以立即提现
+                        </p>
+                    </div>
+                    
+                </div>
+                <div class="grayShadow"></div>
+                <div class="processDisciple">
+                    <div class="howto">
+                        <p class="question">如何邀请收徒</p>
+                        <p class="answer">看下面流程，非常简单</p>
+                    </div>
+                    <ul id="squre">
+                        <li>
+                            <img class="processPic" src="../icon/welfare-apprentice-iphone.png" >
+                            <p class="shareFont">点击邀请按钮</p>
+                            <p class="shareFont">分享给好友</p>
+                            <img id="navLine" src="../icon/shoutu_jiantou.png" alt="">
+                        </li>
+                        
+                        <li>
+                            <img class="processPic" src="../icon/welfare_apprentice_iphone2.png" >
+                            <p class="shareFont">好友打开连接</p>
+                            <p class="shareFont">下载安装</p>
+                            <img id="navLineNext" src="../icon/shoutu_jiantou.png" alt="">
+                        </li>
+                        
+                        <li>
+                            <img id="processPicThree" src="../icon/welfare_apprentice_hongbao3.png" >
+                            <p class="shareFont">好友登录阅读您获</p>
+                            <p class="shareFont">得红包及贡献奖励</p>
+                        </li>
+                    </ul>
+                    <div class="tipper">
+                        <p class="answers">提示：新徒弟需要在新设备上注册(之前未登录过看点头条的手机)+有效阅读4篇文章，方可获得奖励。</p>
+                        <p class="answers"></p>
+                    </div>
+                    <div class="black"></div>
+                </div>
+
+            </div>
+            <div class="segmentTwoContent" id="k_segmentTwoContent">
+                <ul class="listInfo">
+                </ul>
+                <div class="infoTip">
+                    <p id="showTip">只显示前50名</p>
+                </div>
+                <div class="black"></div>
+            </div>
+            <div class="segmentThreeContent" id="k_segmentThreeContent">
+                <div class="titleQuest">
+                    <p class="question">收徒除了现金奖励,还有奖励吗？</p>
+                    <p class="answer">答案是：肯定有啊！徒儿永久贡献</p>
+                    <p class="answers">徒弟将每天给你贡献
+                        <span>金币&nbsp;(无上限)</span> 每个徒弟每有效阅读一篇文章，奖励徒弟
+                        <span class="redFont">10金币</span>，贡献给你
+                        <span class="redFont">20金币</span>；徒弟越多，奖励越多，躺着赚零花钱，多多收徒吧！</p>
+                </div>
+                <div style="height:1.8rem"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">   
+        <div class="footLeft">
+            <img class="sweepCodePic" src="../icon/welfare_apprentice_code.png" >
+            <p class="sweepFont">扫码邀请</p>
+        </div>
+        <div class="footRight">
+            <img class="wechatPic" src="../icon/welfare_apprentice_weixin.png" >
+            <img id="hot" src="../icon/welfare_apprentice_hot.png">
+            <p class="sweepFont">微信邀请</p>
+        </div>
+    </div>
+
+
+    <!--底部弹框  -->
+    <div id="share" class="mui-popover mui-popover-action mui-popover-bottom">
+        <div class="mui-table-view aa mui-table-view-cell">
+            <div class="top">分享到3个微信群内，能提高85%的成功率</div>
+            <div class="bott">
+                <div>
+                    <div class="shares weChat " name="weChat">
+                        <img src="../icon/welfare_apprentice_share_weixin@2x.png" />
+                        <img id="tuijian" src="../icon/tuijian.png" >
+                    </div>
+                    <span>微信邀请</span>
+                    
+                </div>
+                <div  id="friends">
+                    <div class="shares friend" name="friend" >
+                        <img src="http://yun.janesi.net/web-test/zhiqu-web/images/friend.png" >
+                    </div>
+                    <span>朋友圈邀请</span>
+                </div>
+                <div  id="msg">
+                    <div class="shares message" name="message">
+                        <img src="../icon/video_share_pengyouquan@2x.png" >
+                    </div>
+                    <span>短信邀请</span>
+                </div>
+                <div>
+                    <div class="shares QQ" name="QQ">
+                        <img src="../icon/video_share_qq@2x.png" />
+                    </div>
+                    <span>QQ邀请</span>
+                </div>
+                <div>
+                    <div class="shares sweepCode" name="sweepCode">
+                        <img src="../icon/video_share_weibo@2x.png" />
+                    </div>
+                    <span>&nbsp;扫码邀请</span>
+                </div>
+            </div>
+            <div class="bottom">
+                <p>不能用微信分享“<span class="blue">点击查看教程</span>”</p>
+            </div>
+        </div>
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell" style="border-radius:0;height:1.38rem;">
+                <a href="#share" >
+                    <span style="line-height:1.88rem">取消</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+<span style="display:none">
+    <script src="https://s13.cnzz.com/z_stat.php?id=1273878911&web_id=1273878911" language="JavaScript"></script>
+</span>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/swiper-4.2.6.min.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/JanesiBridges.js"></script> 
+<script src="../js/teacherAndPupil.js"></script>
+<script>
+    var ua = navigator.userAgent;
+    var timeout = ua.toLocaleLowerCase().indexOf('redmi')>-1?1000:0;
+    setTimeout(function(){
+        document.querySelector('body').style.display=''
+    },timeout)
+</script>
+</html>

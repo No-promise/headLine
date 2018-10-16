@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="../css/timeLimitedWelfare.css" rel="styleSheet">
+  <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+  <title>限时福利</title>
+</head>
+
+<body>
+  <section class="container content-box">
+    <!-- 顶部图片 -->
+    <div class="content-top">
+      <img class="top-pic" src="../images/onedollar_tbg.png">
+    </div>
+    <!-- 提现信息 -->
+    <div class="content-middle">
+      <p class="welfare-title">恭喜您，获得一次提现机会！</p>
+      <p class="welfare-money">
+        <span class="dollar-icon">￥</span>
+        <span class="welfare-money-value">1.00</span>
+      </p>
+      <button type="button" class="cash-btn btn" onClick="getCash()">立即领取提现</button>
+      <p class="cash-tips">每天限量2万份，先到先得！</p>
+    </div>
+    <!-- 提现进度 -->
+    <div class="content-bottom">
+      <p class="process-title">—&nbsp;&nbsp;当前任务进度&nbsp;&nbsp;—</p>
+      <div class="process-content">
+        <span id="done-process-icon" class="process-icon done-process">
+          <img class="process-pic" src="../images/onedollar_read@2x.png">
+        </span>
+        <span id="done-process" class="process-bar done-process">
+          <span class="process-bar-title">阅读文章</span>
+          <span class="process-bar-box">
+            <span class="default-bar bar"></span>
+            <span class="active-bar bar"></span>
+          </span>
+          <span class="process-bar-account">
+            <label class="color-red" id="now-article">1</label>
+            <label class="color-default" id="amount-article">/5篇</label>
+          </span>
+        </span>
+        <span id="undo-process" class="process-bar undo-process">
+          <span class="default-line process-line"></span>
+          <span class="active-line process-line"></span>
+          <span class="day-1 day-box">
+            <span class="day-box-row">
+              <span class="done-img">
+                <img src="../images/onedollar_choose_day.png">
+                <span class="undo-img"></span>
+              </span>
+              <span class="step-title">1天</span>
+            </span>
+          </span>
+          <span class="day-2 day-box">
+            <span class="day-box-row">
+              <span class="done-img">
+                <img src="../images/onedollar_choose_day.png">
+                <span class="undo-img"></span>
+              </span>
+              <span class="step-title">2天</span>
+            </span>
+          </span>
+          <span class="day-3 day-box">
+            <span class="day-box-row">
+              <span class="done-img">
+                <img src="../images/onedollar_choose_day.png">
+                <span class="undo-img"></span>
+              </span>
+              <span class="step-title">3天</span>
+            </span>
+          </span>
+          <span class="day-4 day-box">
+            <span class="day-box-row">
+              <span class="done-img">
+                <img src="../images/onedollar_choose_day.png">
+                <span class="undo-img"></span>
+              </span>
+              <span class="step-title">4天</span>
+            </span>
+          </span>
+          <span class="day-5 day-box">
+            <span class="day-box-row">
+              <span class="done-img">
+                <img src="../images/onedollar_choose_day.png">
+                <span class="undo-img"></span>
+              </span>
+              <span class="step-title">5天</span>
+            </span>
+          </span>
+        </span>
+        <span class="process-btn undo-btn">
+          <button type="button" class="link-btn btn" id="to-read" onClick="toRead()">去阅读</button>
+        </span>
+      </div>
+      <div class="to-get-welfare" id="done-bottom">
+        <p class="get-welfare">
+          当日看
+          <span class="color-red">文章数量达到5篇</span>，即可获得一次1元提现机会！
+        </p>
+        <p class="get-welfare">
+          温馨提示：阅读计时环转完一圈才算阅读完一篇文章哦~
+        </p>
+      </div>
+      <div class="to-get-welfare" id="undo-bottom">
+          <p class="get-welfare">
+            <span class="color-red">连续登录5天</span>，每天看文章数量达到5篇即可获得一次1元提现机会！提示：阅读计时环转完一圈才算阅读完一篇文章哦~
+          </p>
+        </div>
+    </div>
+  </section>
+  <!-- 遮罩 -->
+  <div class="cover" id="cover" onclick="closeModal()"></div>
+  <!-- 弹出提示框 -->
+  <div class="cover-tips" id="cover-tips">
+    <p class="close-btn">
+      <img class="close-icon" src="../images/onedollar_close.png" onclick="closeModal()">
+    </p>
+    <!-- 无提现历史 -->
+    <h3 class="tips-title done-modal-title">再看<span class="color-red"></span>可提现</h3>
+    <p class="tips-content done-modal-content">当日看文章数量达到5篇,即可获得一次1元提现机会！</p>
+    <!-- 有提现历史 -->
+    <h3 class="tips-title undo-modal-title">还差<span class="color-red"></span>可提现</h3>
+    <p class="tips-content undo-modal-content">连续登录5天，每天看文章数达到5篇才可以提现！</p>
+    <!-- 版本过低 -->
+    <h3 class="tips-title low-modal-title">此活动暂不支持当前版本</h3>
+    <p class="tips-content low-modal-content">请重新启动APP升级到最新版本 或进入钱包页面提现！<br><br><span class="color-red">温馨提示：点击 我的 > 现金 > 钱包</span></p>
+
+    <button id="modal-to-read" class="link-btn btn big-btn" onCLick="toRead()">去阅读</button>
+    <button id="close-modal" class="link-btn btn big-btn" onclick="closeModal()">我知道了</button>
+  </div>
+  <span class="tips">
+    今日已提现，请明日再来
+  </span>
+  <!-- 走马灯 -->
+  <div class="scroll-list">
+  </div>
+</body>
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/JanesiBridges.js"></script>
+<script src="../js/timeLimitedWelfare.js"></script>
+</html>

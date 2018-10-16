@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script> 
+    <link href="../css/faceToFaceCode.css" rel="stylesheet" />
+      
+    <!-- <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script> -->
+     <!-- <script src="../js/jquery.min.js"></script>   -->
+    <script type="text/javascript" src="http://static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+    <title>奖励邀请</title>
+
+</head>
+
+<body class="reset">
+
+    <div class="f_wrapper">
+
+        <img class="headerBg" src="../icon/face_to_face_title.png" />
+        <div class="codeBgContainer">
+            <img class="codeBg" id="k_codeBg" />
+            <div class="qrcodeBg">
+                <div class="qrcodeWhiteBg" id="k_qrcodeWhiteBg">
+                    <div class="qrcode" id="qrcode"></div>
+                </div>
+            </div>
+        </div>
+        <img class="footerBg" src="../icon/face_to_face_process@2x.png" />
+        <div class="temp"> </div>
+    </div>
+    <span style="display:none">
+        <script src="https://s13.cnzz.com/z_stat.php?id=1273878911&web_id=1273878911" language="JavaScript"></script>
+    </span>
+</body> 
+<script src="../js/common.js"></script>
+<script src="../js/JanesiBridges.js"></script>
+<script>
+
+    var k_codeBgT = document.getElementById("k_codeBg");
+    if (window.JanesiBridge.isAndroid) {
+
+        k_codeBgT.src = '../icon/face_to_face_hongbao_bg@2x.png';
+    } else {
+
+        k_codeBgT.src = '../icon/face_to_face_hongbao_bg_ios.png';
+
+    }
+    var finalHeight;
+    window.onload = function () {
+        var k_codeBg = document.getElementById("k_codeBg");
+        finalHeight = k_codeBg.offsetHeight / 2;
+        var qrcodeDiv = document.getElementById("qrcode");
+        var tempHeight = finalHeight + 'px';
+        console.log('tempHeight', k_codeBg.offsetHeight);
+        // qrcodeDiv.style.height = tempHeight;
+        // qrcodeDiv.style.width = tempHeight;
+        qrcodeDiv.style.backgroundImage = 'url("../icon/qrcode_loading@2x.png")';
+        qrcodeDiv.style.backgroundSize = tempHeight, tempHeight;
+        // 全局定义请求地址
+        window.JanesiApi.reqUrl = requestUrl;
+            getData(finalHeight);
+
+    }
+        // 获取邀请码
+        function getData($finalHeight){ 
+            if($finalHeight<=0) {
+                $finalHeight = parseInt(window.screen.width * 0.47)
+                console.log('$finalHeight is 0:',$finalHeight)
+            }
+        var reqApi = '/app/interest/invite/share';
+            window.JanesiApi.sendApi(reqApi, 'post', {
+                // userId: userId,
+                // appId: appId,
+                type: 'F2F'
+            }, function (res) {
+                var qrcode = new QRCode(document.getElementById("qrcode"), {
+                    width: $finalHeight,
+                    height: $finalHeight
+                });
+                // alert(res.result.link);                
+                qrcode.makeCode(res.result.link);
+            })
+        }
+
+</script>
+
+
+</html>

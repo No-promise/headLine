@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="http://yun1.janesi.net/web-test/zhiquFuli/css/bindInviteCode.css" rel="stylesheet" />
+    <link href="http://yun.janesi.net/web/share/ranking/css/mui.min.css" rel="stylesheet" />
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>邀请码</title>
+</head>
+
+<body>
+
+    <div class="b_wrapper">
+
+        <div class="bg">
+
+            <div class="codeTitle"> &nbsp;绑定的邀请码&nbsp; </div>
+            <div class="codebg" id="k_code">
+                
+            </div>
+        </div>
+    </div>
+</body>
+<script src="http://yun.janesi.net/web-test/zhiqu-web/js/jquery-2.1.1.min.js"></script>
+<script>
+    var url = 'http://118.25.10.151:8090';
+    var appId = '10010';
+    var userId = '542';
+    // 获取公参：
+    window.android.updateRemark("ok");
+
+    function publicListParams(listPara) {
+        var val = JSON.parse(listPara)
+        appId = val.appId;
+        userId = val.userId;
+        url = val.url;
+        fetData();
+    };
+
+    function fetData() {
+        $.ajax({
+            type: 'post',
+            data: {
+                userId: userId,
+                appId: appId,
+            },
+            url: url + '/api/ucs/user/invite_code',
+            success: function (res) {
+
+                if (res.code == 0) {
+
+                    var k_codeBg = document.getElementById("k_code");
+                    k_codeBg.innerHTML = res.result;
+                }
+            }
+        })
+    }
+</script>
+
+</html>
