@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <link href="../css/inviteCodeTip.css" rel="stylesheet" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>绑定邀请码</title>
+</head>
+
+<body>
+
+    <div class="tip_wrapper">
+        <div class="tipBg">
+            <img class="tipImg" src="../icon/invite_hongbao_bg1.png">
+        </div>
+        <div class="numContentBg">
+
+            <div class="numContent">
+                <div class="string1">
+                    <p> 恭喜你获得 </p>
+                </div>
+                <div class="string2">
+                    <p> 现金红包 </p>
+                </div>
+                <div class="string3">
+                    <p class="timer count-title" id="count-number" data-to="0.5" data-speed="1500">
+                    </p>
+                    <span>元</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="btnBg">
+             <img class="btn" src="../icon/invite_code_hongbao_atn@2x.png" /> 
+            <div class="btnTitle" onclick="openUrl()">
+                <p class="contentTitle">去收徒赚钱</p>
+            </div>
+        </div>
+        <div class="footerProfile">
+            <p>偷偷告诉你，收徒越多赚的越多哦！！！</p>
+        </div>
+    </div>
+<span style="display:none">
+    <script src="https://s13.cnzz.com/z_stat.php?id=1273878911&web_id=1273878911" language="JavaScript"></script>
+</span>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/count.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/JanesiBridges.js"></script>
+
+
+
+<script>
+        var strategic = {
+            'url': urlBase + '/janesi-headline/ZQFL/templete/teacherAndPupil.html'
+        }
+
+            
+    function openUrl() {
+        window.JanesiBridge.callNative('open', strategic);
+
+    }
+</script>
+
+</html>

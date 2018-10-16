@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>师徒</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="../js/setDpr.js"></script>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/teachersdisciple.css">
+    <style>
+    [v-cloak] {
+        display: none;
+    }
+    </style>
+     <!-- <script src="../js/vconsole.min.js"></script>
+    <script>
+        var vConsole = new VConsole();
+        // vConsole.show();
+    </script>    -->
+</head>
+
+<body>
+    <div id="app">
+        <!-- banner  -->
+        <div class="topBanner wrapper  flex_alcc">
+            <img class="makeMoney" src="../icon/teacher/邀请 人 , 赚 元@2x.png">
+            <p class="topTip">奖励无上限,多邀多赚</p>
+            <p class="haveNums">已有<span>{{haveInviteNums}}</span>人邀请好友</p>
+            <!-- 列表数据  -->
+            <marquee direction="up" loop="infinite" scrolldelay="250" >
+                <li class="activeList row flex_jcc flex_alcc" v-for='item in list'>
+                    <img class="avatorActive" v-bind:src="item.avator">
+                    <p class="listNameActive" v-cloak >{{item.nickName}}</p>
+                    <p class="listContentActive" v-cloak >刚刚拆到  {{item.money}}元红包</p>
+                </li>
+            </marquee> 
+            <!--拆红包  -->
+            <div class="main_activity wrapper flex_alcc text_center">
+                <div class="coinOpen row flex_jcc flex_alcc">
+                     <p class="actionOPen" v-show="haveRedBag" @click="openAlertActive()">
+                         拆X<span v-cloak >{{redBags}}</span>
+                        </p> 
+                    <p class="actionShareOPen" v-show="noHaveRedBag" @click="openAlertNoneBag()">拆</p>
+                </div>
+                <p class="myInvite" @click="invitateCode()">我的邀请码</p>
+                <p class="inviteNum" @click="invitateCode()" v-cloak>{{inviteData.inviteCode}}</p>
+            </div>
+            <p class="haveInvite" @click="myPupil()">已邀请好友 <span v-cloak >{{inviteData.inviteCount}}</span>人 ></p>
+        </div>
+        <div class="segmenting"></div>
+        <!--选项卡   -->
+        <ul class="tabs row flex_jcsa flex_alcc">
+			<li v-for="(tab,index) in tabsName">
+				<div class="tab-link" @click="tabsSwitch(index)" v-bind:class="{active:tab.isActive}">{{tab.name}}</div>
+			</li>
+		</ul>  
+		<div class="cards">
+            <!--奖励说明  -->
+			<div class="tab-card" style="display: block;">
+                <div class="instruction wrapper flex_alcc text_center">
+                    <p class="question">现金红包奖励如何发放？</p>
+                    <p class="answer">好友注册并填写你的邀请码，绑定微信每天阅读4篇文章，你即可获得红包。</p>
+                    <ul class="squer row flex_jcsb">
+                        <li>
+                            <p class="daySquer">第1天</p>
+                            <p class="money">0.5元</p>
+                        </li>
+                        <img class="guideLine" src="../icon/teacher/Group 8@2x.png">
+                        <li>
+                            <p class="daySquer">第2天</p>
+                            <p class="money">0.2元</p>
+                        </li>
+                        <img class="guideLine" src="../icon/teacher/Group 8@2x.png">
+                        <li>
+                            <p class="daySquer">第3天</p>
+                            <p class="money">1元</p>
+                        </li>
+                    </ul>
+                    <img class="portraitLine" src="../icon/teacher/Group 9@2x.png" >
+                    <ul class="squer squerTwo row flex_jcsb">
+                        <li>
+                            <p class="daySquer">第6天</p>
+                            <p class="money">最高8元</p>
+                        </li>
+                        <img class="guideLine" src="../icon/teacher/Group 10@2x.png">
+                        <li>
+                            <p class="daySquer">第5天</p>
+                            <p class="money">0.3元</p>
+                        </li>
+                        <img class="guideLine" src="../icon/teacher/Group 10@2x.png">
+                        <li>
+                            <p class="daySquer">第4天</p>
+                            <p class="money">0.5元</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="segmenting"></div>
+                <!-- 收徒小窍门 -->
+                <div class="discipleTrick wrapper flex_jcc text_center">
+                    <p class="question">收徒小窍门</p>
+                    <p class="answer" style="margin-bottom:0.5866rem;">收徒成功率提升200%</p>
+                </div>
+                <div class="leftTip">
+                    <div class="borderTip">1</div>
+                    <p class="answersTrick " >
+                            邀请您的家人、朋友、同学、同事成功率最高，被邀请人也可获得
+                        <span class="redFont">现金红包奖励</span>哦
+                    </p>
+                </div>
+                <div class="leftTip">
+                    <div class="borderTip">2</div>
+                    <p class="answersTrick" >
+                        分享到3个以上微信群/QQ群成功收徒的几率提升
+                            <span class="redFont" >200%</span>。
+                    </p>
+                </div> 
+                <div class="leftTip tipBlack">
+                    <div class="borderTip">3</div>
+                    <p class="answersTrick" >
+                        可以告诉您的朋友：注册即可领现金红包，还可以立即提现
+                    </p>
+                </div>
+                <div class="segmenting"></div>
+                <!--如何邀请收徒  -->
+                <div class="howTo wrapper flex_jcc text_center">
+                    <p class="question">如何邀请收徒</p>
+                    <p class="answer">看下面流程，非常简单</p>
+                    <ul class=" imgSqure row flex_jcsa flex_alcc">
+                        <img src="../icon/welfare-apprentice-iphone.png">
+                        <img src="../icon/shoutu_jiantou.png">
+                        <img src="../icon/welfare_apprentice_iphone2.png">
+                        <img src="../icon/shoutu_jiantou.png">
+                        <img src="../icon/welfare_apprentice_hongbao3.png" >
+                    </ul>
+                    <ul class="textSqure row flex_jcsb flex_alcc">
+                        <li>
+                            点击邀请按钮 分享给好友
+                        </li>
+                        <li>好友打开链接 下载安装</li>
+                        <li>
+                            好友登录阅读您获得 红包及贡献奖励
+                        </li>
+                    </ul>
+                </div>
+                <p class="howToTip">
+                        提示：新徒弟需要在新设备注册（之前未登录过看点头条的手机）+有效阅读4篇文章，方可获得奖励。
+                </p>
+            </div>
+            <!--排行榜  -->
+			<div class="tab-card">
+                <ul class="listInfo ">
+                    <li class="userList row flex_jcsa flex_alcc" v-for='(item,index) in userList'>
+                        <div class="leftRank text_center">
+                            <p>{{index+1}}</p>
+                        </div>
+                        <img class="listAvatar" v-bind:src="item.avator">
+                        <div class="listName wrapper">
+                            <p>{{item.nickName}}</p>
+                            <p>收徒{{item.inviteCount}}人</p>
+                        </div>
+                        <p class="doller">{{item.totalBalance}}元</p>
+                    </li>
+                </ul>
+            </div>
+            <!--徒弟贡献说明  -->
+			<div class="tab-card">
+               <div class="titleQuest wrapper text_center">
+                    <p class="question">收徒除了现金奖励,还有奖励吗？</p>
+                    <p class="answer">答案是：肯定有啊！徒儿永久贡献</p>
+                </div>
+                <p class="answers contribute">徒弟将每天给你贡献
+                    <span class="redFont">金币&nbsp;(无上限)</span> 每个徒弟每有效阅读一篇文章，奖励徒弟
+                    <span class="redFont">10金币</span>，贡献给你
+                    <span class="redFont">20金币</span>；徒弟越多，奖励越多，躺着赚零花钱，多多收徒吧！
+                </p>
+            </div>
+        </div>
+        <div class="block"></div>
+        <!--底部分享  -->
+        <div id="footer" class="row flex_jcsa">
+            <div class="footLeft row flex_jcc flex_alcc" @click="sweepShare()">
+                <img class="sweepCodePic" src="../icon/welfare_apprentice_code.png">
+                <p class="sweepFont">扫码邀请</p>
+            </div>
+            <div class="line"></div>
+            <div class="footRight row flex_jcc flex_alcc" @click="wechatShare()">
+                <img class="wechatPic" src="../icon/welfare_apprentice_weixin.png">
+                 <img class="hot" src="../icon/welfare_apprentice_hot.png"> 
+                <p class="sweepFont">微信邀请</p>
+            </div>
+        </div>
+        <!--底部分享弹框  -->
+        <div class="bottomShareBgr" v-show="bottomShare" @click.self="closeBottomShare()" v-cloak>
+            <div class="bottomShare text_center" >
+                <p class="tipBottomShare ">分享到3个微信群内，能提高85%的成功率</p>
+                <ul class="row flex_jcsa"> 
+                    <li @click="wechatShare()"> 
+                        <img src="../icon/welfare_apprentice_share_weixin@2x.png" />
+                        <img id="tuijian" src="../icon/tuijian.png" > 
+                        <span>微信邀请</span>
+                    </li>
+                    <li v-show="friendShare" @click="friendGoShare()">
+                        <img src="http://yun.janesi.net/web-test/zhiqu-web/images/friend.png" >
+                        <span>朋友圈邀请</span>
+
+                    </li> 
+                    <li v-show="messageShare" @click="messageGoShare()">
+                        <img src="../icon/video_share_pengyouquan@2x.png" >
+                        <span>短信邀请</span>
+                    </li> 
+                    <li @click="qqShare()">
+                        <img src="../icon/video_share_qq@2x.png" />
+                        <span>QQ邀请</span>
+
+                    </li>
+                    <li @click="sweepShare()">
+                        <img src="../icon/video_share_weibo@2x.png" />
+                        <span>&nbsp;扫码邀请</span>
+                    </li>
+                </ul>
+                <div class="cancleBottomShare text_center" @click.self="closeBottomShare()">
+                    取消
+                </div>
+            </div>
+        </div>
+        <!--新手引导  -->
+        <div class="newGuide" v-show="newGuide" @click="closeNewGuide()" v-cloak>
+            <img  src="../icon/tips_apprentice.png">
+        </div>
+        <!--弹框 没有红包时  -->
+        <div class="alert_noneBag" v-show="alertNoneBag" v-cloak>
+            <img class="closeButtn" src="../icon/welfare_apprentice_close@2x.png"  @click="closeBtn()">
+            <div class="alert_bgNone">
+                <p class="noneTitle">哎呀，没有红包啦！</p>
+                <p class="noneTip">每收一徒，<span class="redNoneTip">8元</span>轻松到手</p>
+                <img class="noneImg" src="../icon/welfare_apprentice_reward_none@2x.png" >
+                <!-- <a href="#share">  -->
+                    <div class="noneBtn" @click="shareNoneBtn()">
+                        我要分享赚钱
+                    </div>
+                <!-- </a>  -->
+            </div>
+        </div>
+        <!--弹框 领取红包  有红包 -->
+        <div id="alert_active" v-show="alertActive" v-cloak >
+            <img class="closeButtn" src="../icon/welfare_apprentice_close@2x.png"  @click="closeBtn()">
+            <div class="alert_img">
+                <img src="../icon/welfare_apprentice_reward_tanchuang@2x.png" >
+                <p class="alert_title">收徒奖励</p>
+                <p class="alert_money"><span class="getMoey">{{redAlertOpenBag.money}}</span><span class="alert_small">元</span></p>
+                <div class="alert_tip">已存入钱包</div>
+                <p class="statusNum" v-show="haveStatusNum">
+                    还有 <span class="numberBags">{{redAlertOpenBag.num}}</span> 个
+                </p>
+                <p class="statusNone" v-show="haveStatusNone">
+                    红包已领完，收徒去赚钱
+                </p>            
+                <div class="alert_getBtn" v-show="getBtnAlert" @click="getBtnAlertBtn">
+                    继续领取
+                </div> 
+                <a href="#share"> 
+                    <div class="alert_makeBtn" v-show="makeBtnAlert" @click="makeBtnAlertBtn">
+                        继续赚钱
+                    </div>
+                </a>
+            </div>
+        </div> 
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/JanesiBridges.js"></script>
+<script>
+var vm = new Vue({
+    el: '#app',
+    data: {
+        list:[
+            {
+                avator:'../imgIcon/1.jpg',
+                name:'zzz',
+                content:'刚刚拆到 2元红包'
+            },
+            {
+                avator:'../imgIcon/4.jpg',
+                name:'kkk',
+                content:'刚刚拆到 3元红包'
+            },
+            {
+                avator:'../imgIcon/7.jpg',
+                name:'nnn',
+                content:'刚刚拆到 12元红包'
+            }
+        ],
+        tabsName: [
+            {
+                name: "奖励说明",
+                isActive: true
+            }, 
+            {
+                name: "排行榜",
+                isActive: false
+            }, 
+            {
+                name: "徒弟贡献说明",
+                isActive: false
+            }
+        ],
+        userList:[],
+        inviteData:{},
+        haveInviteNums:'',
+        redBags:'',
+        redAlertOpenBag:{},
+        active: false,
+        // 底部分享
+        bottomShare:false,
+        friendShare:false,
+        messageShare:false,
+        // 新手引导
+        newGuide:false,
+        haveRedBag:false,
+        noHaveRedBag:true,
+        // 拆红包弹框
+            // 没有红包
+        alertNoneBag:false,
+            // 有红包
+        alertActive:false,
+        haveStatusNum:false,
+        getBtnAlert:false,
+        haveStatusNone:false,
+        makeBtnAlert:false
+
+    },
+    created() {
+    },
+    mounted() {
+        window.JanesiApi.reqUrl = requestUrl;
+        console.log(requestUrl)
+        // 判断ios或android
+        if (window.JanesiBridge.isAndroid){
+            this.friendShare = true;
+        }else {
+            this.messageShare = true;
+        }
+        // 数据请求
+        this.getHaveInviteNums()
+        this.getRanking()
+        this.getInviteCode()
+        this.getMoneyRecord()
+        this.getPacket()
+        // 新手引导
+        window.JanesiBridge.callNativeWithCallBack('shouldShowGuide', {
+            'position': 1
+        }, function (res) {
+            if (res.action == 1) {
+                showAlert();
+            }
+        });
+
+    },
+    methods: {
+        // 切换选项卡
+        tabsSwitch(tabIndex) {
+			var tabCardCollection = document.querySelectorAll(".tab-card"),
+				len = tabCardCollection.length;
+			for(var i = 0; i < len; i++) {
+				tabCardCollection[i].style.display = "none";
+				this.tabsName[i].isActive = false;
+			}
+			this.tabsName[tabIndex].isActive = true;
+			tabCardCollection[tabIndex].style.display = "block";
+        },
+        // 获取已邀请好友的人数
+        getHaveInviteNums(){
+            var that = this;
+            var reqApi = '/app/interest/invite/invite_count';
+            window.JanesiApi.sendApi(reqApi, 'post', reqParams, function (e) {
+                console.log(e);
+                that.haveInviteNums = e.result;
+            })
+        },
+        // 获得邀请码 .inviteNum.innerHTML 获取今日收徒人数 .plusPeople  获取今日徒弟贡献  .plusNumber
+        getInviteCode(){
+            var that = this;
+            var reqApi = '/app/interest/invite/summary';
+            window.JanesiApi.sendApi(reqApi, 'post', reqParams, function (e) {
+                console.log(e);
+                that.inviteData = e.result;
+            })
+        },
+        // 获取拆红包记录表
+        getMoneyRecord(){
+            var that = this;
+            var reqApi = '/app/interest/task/money_record';
+           window.JanesiApi.sendApi(reqApi, 'post',{
+                // 'appId':appId,
+                // 'userId':userId
+            }, function (e) {
+                console.log(e); 
+                that.list = e.result;
+
+            })
+        },
+        // 排行榜
+        getRanking(){
+            var that = this;
+            var baseImg = 'http://yun.janesi.net/web-test/zhiqu-web/img/userPhoto.jpg'
+            var reqApi = '/app/interest/statistics/ranking';
+             window.JanesiApi.sendApi(reqApi, 'post', reqParams, function (e) {
+                for (let i = 0; i <= e.result.length - 1; i++) {
+                     if (e.result[i].avator == '') {
+                        e.result[i].avator = baseImg;
+                    }
+                }
+                that.userList = e.result;
+             })
+        },
+        // 获取钱包数 
+        getPacket(){
+            var that = this;
+            var reqApi = '/app/interest/task/packet_num';
+            window.JanesiApi.sendApi(reqApi, 'post',{
+                // 'appId':appId,
+                // 'userId':userId
+            }, function (e) {
+                console.log(e); 
+                var res = e.result;
+                
+                if(res.packetNum==0){
+                    that.noHaveRedBag=true;
+                    that.haveRedBag=false;
+                }else{
+                    that.redBags = res.packetNum;
+                    that.noHaveRedBag=false;
+                    that.haveRedBag=true;
+                }
+            })
+        },
+        // 打开有红包的弹框
+        openAlertActive(){
+            var that = this;
+            var reqApi = '/app/interest/task/get_packet';
+            window.JanesiApi.sendApi(reqApi, 'post',reqParams, function (e) {
+                console.log(e); 
+                var res = e.result;
+                that.redAlertOpenBag = res
+            $('html,body').addClass('scrollbox');
+                if (res.num == 0) {
+                    that.haveStatusNum=false;
+                    that.getBtnAlert=false;
+                    that.haveStatusNone=true;
+                    that.makeBtnAlert=true;
+                } else {
+                    that.haveStatusNum=true;
+                    that.getBtnAlert=true;
+                    that.haveStatusNone=false;
+                    that.makeBtnAlert=false;
+                }
+                that.alertActive=true;
+            })
+        }, 
+        // 继续领取
+        getBtnAlertBtn(){
+            var that = this;
+            that.alertActive=false;
+            setTimeout(function() {
+                that.openAlertActive();
+                that.getPacket();
+                that.alertActive=true;
+            }, 200);
+        },
+        // 继续赚钱  弹出分享
+        makeBtnAlertBtn(){
+            var that = this;
+            
+            that.alertActive=false;
+            setTimeout(function() {
+                that.getPacket();
+            }, 0);
+            that.bottomShare = true;
+        },
+        // 打开分享的弹框
+        openAlertNoneBag(){
+            var that = this;
+            $('html,body').addClass('scrollbox');
+            
+            that.alertNoneBag=true;
+        },
+        // 去分享  （没红包弹框 按钮）
+        shareNoneBtn(){
+            var that = this;
+            that.getPacket();
+            $('html,body').addClass('scrollbox');
+            that.alertNoneBag = false;
+            that.bottomShare = true;
+        },
+        // 关闭按钮
+        closeBtn(){
+            var that = this;
+            $('html,body').removeClass('scrollbox'); //使网页恢复可滚动
+            that.getPacket()
+            that.alertActive=false
+            that.alertNoneBag=false;
+        },
+        // 关闭底部分享
+        closeBottomShare(){
+            var that = this;
+            $('html,body').removeClass('scrollbox'); //使网页恢复可滚动
+            that.bottomShare = false;
+        },
+        // 打开新手引导
+         showAlert() {
+            var that = this;
+            $('html,body').addClass('scrollbox');
+            that.newGuide = true;
+        },
+        // 关闭新手引导
+        closeNewGuide(){
+            var that = this;
+            $('html,body').removeClass('scrollbox'); //使网页恢复可滚动
+            that.newGuide = false;
+        },
+        // 进入徒弟界面
+        myPupil(){
+            var jumpLeft = {
+                'url': urlBase + '/janesi-headline/ZQFL/templete/prenticeProfile.html?action=prentice'
+            }
+            window.JanesiBridge.callNative('open', jumpLeft);
+        },
+        invitateCode(){
+            var invitateCode = {
+                'url': urlBase + '/janesi-headline/ZQFL/templete/inviteCodeProfile.html'
+            }
+            window.JanesiBridge.callNative('open', invitateCode);
+        },
+        // 分享
+        wechatShare(){
+            window.JanesiBridge.callNative('publicTurnShare', {
+                'pathWay': 'weChat'
+            });
+        },
+        friendGoShare(){
+            window.JanesiBridge.callNative('publicTurnShare', {
+                'pathWay': 'friend'
+            });
+        },
+        messageGoShare(){
+             window.JanesiBridge.callNative('publicTurnShare', {
+                'pathWay': 'message'
+            });
+        }, 
+        qqShare(){
+            window.JanesiBridge.callNative('publicTurnShare', {
+                'pathWay': 'QQ'
+            });
+        }, 
+        sweepShare(){
+             window.JanesiBridge.callNative('publicTurnShare', {
+                'pathWay': 'sweepCode'
+            });
+        }
+
+
+    }
+})
+
+</script>
+
+</html>

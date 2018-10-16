@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <link rel="stylesheet" href="../css/mui.min.css">
+    
+    <title>赚钱攻略</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        .makeFull #introduceMake {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+        /*底部弹框  */
+
+        .mui-table-view-cell {
+            padding: 0;
+            border-radius: 0;
+            background-color: #fff;
+        }
+
+        .mui-popover.mui-popover-action .mui-table-view {
+            margin: 0;
+        }
+
+        .mui-table-view .top {
+            font-size: 14px;
+            color: #999;
+            margin: 0.59rem 0 0.61rem 0;
+        }
+
+        .mui-popover.mui-popover-action .mui-table-view {
+            border-radius: 0;
+        }
+
+        .mui-table-view-cell>a:not(.mui-btn) .mui-table-view-cell>a:not(.mui-btn) {
+            padding: 0;
+            margin: 0 0 0.8rem 0;
+        }
+
+        .mui-table-view .bott {
+            font-size: 12px;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        .weChat{
+            position: relative;
+        }
+        .weChat #tuijian{
+            position: absolute;
+            top:0;
+            right:-0.4rem;
+            width: 0.91rem;
+            height: 0.51rem;
+        }
+        .mui-table-view .bott img {
+            width: 1.44rem;
+            height: 1.44rem;
+        }
+
+        .mui-table-view .mui-table-view-cell span {
+            font-size:16px;
+            color: #333;
+        }
+
+        #share .mui-table-view:nth-of-type(2) {
+            width: 10rem;
+            height: 1.39rem;
+            border-radius: 0;
+        }
+        .mui-table-view .bottom{
+            margin-bottom:0.8rem;
+            display: none; 
+        }
+        .mui-table-view .bottom p{
+            font-size: 14px;
+            color:#333;
+        }
+        .mui-table-view .bottom span{
+            color:#4A90E2;
+        }
+        #friends{
+            display: none;
+        }
+        #msg{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="makeFull">
+        <div id="introduceMake"> 
+            <img src="../icon/makeMoney/strategy_01.png" alt=""> 
+        </div> 
+        <div id="introduceMake"> 
+            <img src="../icon/makeMoney/strategy_02.png" alt=""> 
+        </div> 
+        <div id="introduceMake"> 
+            <img src="../icon/makeMoney/strategy_03.png" alt=""> 
+        </div>
+        <div id="introduceMake"> 
+            <img src="../icon/makeMoney/strategy_04.png" alt=""> 
+        </div> 
+        <div id="introduceMake"> 
+            <img src="../icon/makeMoney/strategy_05.png" alt=""> 
+        </div> 
+        <div id="introduceMake"> 
+            <img src="../icon/makeMoney/strategy_06.png" alt=""> 
+        </div>
+        <div id="introduceMake">
+            <a href="#share"> 
+                <img src="../icon/makeMoney/strategy_07.png" alt="">
+            </a> 
+        </div>
+    </div>
+    <!--底部弹框  -->
+    <div id="share" class="mui-popover mui-popover-action mui-popover-bottom">
+        <div class="mui-table-view aa mui-table-view-cell">
+            <div class="top">分享到3个微信群内，能提高85%的成功率</div>
+            <div class="bott">
+                <div>
+                    <div class="shares weChat " name="weChat">
+                        <img src="../icon/welfare_apprentice_share_weixin@2x.png" alt="" />
+                        <img id="tuijian" src="../icon/tuijian.png" >
+                    </div>
+                    <span>微信邀请</span>
+                </div>
+                <div  id="friends">
+                    <div class="shares friend" name="friend" >
+                        <img src="http://yun.janesi.net/web-test/zhiqu-web/images/friend.png" alt="">
+                    </div>
+                    <span>朋友圈邀请</span>
+                </div>
+                <div  id="msg">
+                    <div class="shares message" name="message">
+                        <img src="../icon/video_share_pengyouquan@2x.png" alt="">
+                    </div>
+                    <span>短信邀请</span>
+                </div>
+                <div>
+                    <div class="shares QQ" name="QQ">
+                        <img src="../icon/video_share_qq@2x.png" alt="" />
+                    </div>
+                    <span>QQ邀请</span>
+                </div>
+                <div>
+                    <div class="shares sweepCode" name="sweepCode">
+                        <img src="../icon/video_share_weibo@2x.png" alt="" />
+                    </div>
+                    <span>扫码邀请</span>
+                </div>
+            </div>
+            <div class="bottom" >
+                <p>不能用微信分享“<span class="blue">点击查看教程</span>”</p>
+            </div>
+        </div>
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell" style="border-radius:0;">
+                <a href="#share" style="height:1.5rem;">
+                    <span style="line-height:1.5rem">取消</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+<span style="display:none">
+    <script src="https://s13.cnzz.com/z_stat.php?id=1273878911&web_id=1273878911" language="JavaScript"></script>
+</span>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/JanesiBridges.js"></script>
+<script>
+
+var teach={'url':urlBase+'/janesi-headline/ZQFL/templete/teach.html'}
+
+
+
+    window.onload = function () {
+        if (window.JanesiBridge.isAndroid == true) {
+            $('#friends').css('display', 'block');
+        } else {
+            $('#msg').css('display', 'block');
+            $('.bottom').css('display', 'block')
+        }
+    }
+
+
+  
+
+
+// 分享
+mui('.bott').on('tap', '.weChat', function(){
+    window.JanesiBridge.callNative('publicTurnShare',{'pathWay':'weChat'});
+})
+mui('.bott').on('tap', '.friend', function(){
+    window.JanesiBridge.callNative('publicTurnShare',{'pathWay':'friend'});
+})
+mui('.bott').on('tap', '.message', function(){
+    window.JanesiBridge.callNative('publicTurnShare',{'pathWay':'message'});
+})
+mui('.bott').on('tap', '.QQ', function(){
+    window.JanesiBridge.callNative('publicTurnShare',{'pathWay':'QQ'});
+})
+mui('.bott').on('tap', '.sweepCode', function(){
+    window.JanesiBridge.callNative('publicTurnShare',{'pathWay':'sweepCode'});
+})
+
+mui('#share').on('tap', '.bottom', function(){
+    window.JanesiBridge.callNative('open',teach);
+})
+</script>
+
+</html>

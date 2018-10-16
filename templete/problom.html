@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>常见问题</title>
+    <style>
+     html,body{
+         width: 100%;
+         height: 100%;
+         margin:0;
+         padding: 0;
+     }
+     p{
+         margin: 0;
+         padding: 0;
+     }
+     .content{
+         padding: 25px 15px 0 15px;
+         /* display: none; */
+     }
+    
+     .title{
+         font-size: 0.32rem; 
+         color: #333;
+         font-weight: bold; 
+         vertical-align: middle;  
+     }
+     .text{
+        font-size: 0.28rem;
+        color:#666;
+        padding-top:7px;
+        padding-left: 10px; 
+        padding-bottom: 30px;
+        font-weight: normal;  
+     }
+     .title::before{
+     	content:'';
+     	display: inline-block;
+     	 width: 6px;
+         height: 6px;
+         background-color: #ffd848;
+         border-radius: 50%;
+         vertical-align: middle;
+     	 margin-right: 5px;
+     }
+    </style>
+</head>
+<body>
+    <div class="content" id="k_content">
+   
+    </div>
+</body>
+<script src="http://yun.janesi.net/web-test/zhiqu-web/js/rem.js"></script>
+<script src="http://yun.janesi.net/web-test/zhiqu-web/js/JanesiBridge.js"></script>
+<script>
+
+console.log(window.JanesiBridge);
+var appName = '';
+if(window.JanesiBridge.isiOS){
+
+    appName = '多点趣闻';
+}else{
+
+    appName = '看点头条';
+}
+
+
+
+var templete = `     <div class="paragraph">        
+          <p class="title">${appName}是什么？</p>
+          <p class="text">
+          	${appName}致力于打造一款新形式的本地资讯阅读软件，以移动应用APP为载体进行内容创造，资讯阅读，提供更多有用、有趣、有益的内容给用户。
+          </p>  
+        </div> 
+        <div class="paragraph">         
+          <p class="title">什么是金币？</p>
+          <p class="text">
+                        金币是${appName}内的一种虚拟货币，它能在客户端中兑现金，后期还会上线兑换商品，金币可参与抽奖活动。
+          </p>  
+        </div> 
+        <div class="paragraph">         
+          <p class="title">金币如何兑换现金？</p>
+          <p class="text">
+             	你获得的金币会在每天凌晨自动兑换成现金。 
+          </p>  
+        </div> 
+        <div class="paragraph">         
+          <p class="title">一金币等于多少人民币？</p>
+          <p class="text">
+             	金币与人民币之间的换算并不固定，根据平台的运营情况，每天的汇率会有所浮动，具体以次日转换为准。
+          </p>  
+        </div> 
+        <div class="paragraph">
+          <p class="title">如何获得金币？</p>
+          <p class="text">
+             	你可以通过【福利】里面的任务每日领取，高额的金币。
+          </p>  
+        </div> `
+
+var content = document.getElementById('k_content');
+content.innerHTML = templete;
+</script>
+</html>

@@ -1,0 +1,641 @@
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    outline-style: none;
+    /*FF*/
+}
+
+body p {
+    margin-bottom: 0;
+}
+
+body {
+    position: absolute;
+    background-color: #f5f5f5 !important;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.w_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+/* 签到section 上部 */
+
+.w_wrapper .signTop {
+    display: flex;
+    justify-content: space-between;
+    height: 2.24rem;
+    align-items: center;
+    margin-left: 0.53rem;
+    margin-right: 0.53rem;
+}
+
+/* 签到section 上部  每日签到 样式 */
+
+.w_wrapper .signTop .leftString .signString1 {
+    font-family: PingFangSC-Medium;
+    font-size: 20px;
+    color: #333333;
+    letter-spacing: -0.41px;
+}
+
+/* 签到section 上部  动动手，零花钱到手 样式 */
+
+.w_wrapper .signTop .leftString .signString2 {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+}
+
+/* 签到section 上部 按钮 样式 */
+
+.w_wrapper .signTop .signBtn {
+    background: #FD4844;
+    border-radius: 0.48rem;
+    width: 2.88rem;
+    height: 0.96rem;
+    text-align: center;
+}
+
+.w_wrapper .signTop .unSign {
+    background: #CCCCCC;
+    border-radius: 0.48rem;
+    width: 2.88rem;
+    height: 0.96rem;
+    text-align: center;
+}
+
+/* 签到section 上部 按钮Title 样式 */
+
+.w_wrapper .signTop .signBtnTitle {
+    line-height: 0.96rem;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+}
+
+/* 签到section 下部 签到天数 div */
+
+.w_wrapper .signBg .signBottom {
+    height: 1.8rem;
+    margin-bottom: 0.2rem;
+    margin-left: 0.55rem;
+    margin-right: 0.55rem;
+}
+
+/* 签到section 下部 签到天数列表 signList ul */
+
+.w_wrapper .signBg .signBottom .signList {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+}
+
+/* 签到section 下部 签到天数列表 item  li */
+
+.w_wrapper .signBg .signBottom .signList .commonItem {
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* 签到section 下部 签到天数列表 item  li  未签到中第三个 与第七个 数字变色 */
+.w_wrapper .signBg .signBottom .signList li:nth-child(3) .unselectedBottomString {
+    color: #ffb200;
+}
+.w_wrapper .signBg .signBottom .signList li:nth-child(7) .unselectedBottomString {
+    color: #ffb200;
+}
+/* 签到section 下部 签到天数列表 item  li  上部文字通用样式*/
+
+.w_wrapper .signBg .signBottom .signList .commonItem .commonTopItem {
+    font-family: PingFangSC-Regular;
+    font-size: 11px;
+    color: #BBBBBB;
+    letter-spacing: -0.56px;
+    text-align: center;
+}
+
+/* 签到section 下部 签到天数列表 item  li  下部文字通用样式*/
+
+.w_wrapper .signBg .signBottom .signList .commonItem .commonBottomItem {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    letter-spacing: -0.71px;
+}
+
+/* 签到section 下部 签到天数列表 item  li  下部文字已签到样式*/
+
+/* .w_wrapper .signBg .signBottom .signList .commonItem .commonBottomItem .selectedBottomString { */
+.w_wrapper .signBg .signBottom .signList .commonItem .selectedBottomString {
+    color: #F44642;
+}
+
+/* 签到section 下部 签到天数列表 item  li  下部文字未签到样式*/
+
+.w_wrapper .signBg .signBottom .signList .commonItem .commonBottomItem .unselectedBottomString {
+     color: #666666; 
+}
+
+/* 签到section 下部 签到天数列表 item  li  图片已签到样式*/
+
+.w_wrapper .signBg .signBottom .signList .commonItem .selectedImg {
+    width: 0.586rem;
+}
+
+/* 签到section 下部 签到天数列表 item  li  图片未签到样式*/
+
+.w_wrapper .signBg .signBottom .signList .commonItem .unselectedImg {
+    width: 0.506rem;
+}
+
+.w_wrapper .sectionBg1 {
+    height: 0.13rem;
+    background-color: #F5F5F5;
+}
+
+/* 收徒 banner section */
+
+.w_wrapper .bannerSection1 {
+    height: 2.93rem;
+    text-align: center;
+    /* background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+/* 收徒 banner section img*/
+
+.w_wrapper .bannerSection1 .bannerImg {
+    width: 8.93rem;
+}
+
+.w_wrapper .ContentsectionBG {
+    height: 100%;
+    background-color: #fff;
+    border-style: solid;
+    border-top: 0.13rem solid #F5F5F5;
+}
+
+.w_wrapper .noobSection {
+    background-color: #F5F5F5;
+}
+
+.w_wrapper .DailySection {
+    height: 100%;
+    background-color: #fff;
+}
+
+.w_wrapper .isNotNoob {
+    height: 0;
+    border: 0;
+}
+
+/* 新手任务 seciton titleBg */
+
+.w_wrapper .ContentsectionBG .sectionHeaderBG .sectionTitleBG {
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 新手任务 secitonBG */
+
+.w_wrapper .ContentsectionBG .sectionHeaderBG {
+    height: 1.33rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+/* 新手任务 seciton icon */
+
+.w_wrapper .ContentsectionBG .sectionHeaderBG .sectionTitleBG .sectionLeftIcom {
+    width: 0.56rem;
+    margin-left: 0.4rem;
+    margin-right: 0.24rem;
+}
+
+/* 新手任务 seciton title */
+
+.w_wrapper .ContentsectionBG .sectionHeaderBG .sectionTitleBG .sectionLeftTitle {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FD4844;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+/* 新手任务 seciton 正常情况下箭头 */
+
+.w_wrapper .ContentsectionBG .sectionHeaderBG .sectionArrowIcon {
+    width: 0.48rem;
+    height: 0.48rem;
+    margin-right: 0.4rem;
+}
+
+/* 覆盖 row线颜色 */
+
+.w_wrapper .ContentsectionBG .mui-table-view:before {
+    background-color: #eee;
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+}
+
+.w_wrapper .mui-table-view-cell:after {
+    height: 0px;
+}
+
+/* 覆盖 row线颜色 */
+
+.w_wrapper .ContentsectionBG .mui-table-view::after {
+    background-color: #eee;
+}
+
+.collapseSectionBG {
+    height: 1.33rem;
+    background-color: #fff;
+}
+
+.w_wrapper .mui-table-view-cell {
+    padding: 0px 0px;
+}
+
+/* 解决 展开列表 会向上跳一下的bug */
+
+.w_wrapper .mui-table-view-cell.mui-collapse.mui-active {
+    margin-top: 0px;
+    background-color: #F5F5F5;
+}
+
+.w_wrapper .mui-table-view:after {
+    height: 0px;
+}
+
+/* 覆盖 row 箭头 */
+
+.w_wrapper .mui-table-view-cell.mui-collapse>.mui-navigate-right:after,
+.mui-table-view-cell.mui-collapse>.mui-push-right:after {
+    content: '';
+}
+
+/* 覆盖 row 箭头 */
+
+.w_wrapper .mui-table-view-cell.mui-collapse.mui-active>.mui-navigate-right:after,
+.mui-table-view-cell.mui-collapse.mui-active>.mui-push-right:after {
+    content: '';
+}
+
+/* 覆盖 <a> 样式*/
+
+.w_wrapper .mui-table-view-cell.mui-active {
+    background-color: #fff;
+}
+
+.w_wrapper .mui-table-view-cell>a:not(.mui-btn) {
+    position: absolute;
+}
+
+/* 覆盖 <a> 点击样式*/
+
+.w_wrapper .mui-table-view-cell>a:not(.mui-btn).mui-active {
+    background-color: #fff;
+}
+
+.w_wrapper .mui-table-view-cell.mui-collapse .mui-collapse-content {
+    margin: 0px;
+    padding: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* 覆盖 签到 完成情况背景色*/
+
+.w_wrapper .mui-table-view-cell.mui-collapse .mui-collapse-content {
+    background-color: #F5F5F5;
+}
+
+.ContentsectionBG .collapseSectionBG {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 左边线和圆形 div*/
+
+.ContentsectionBG .collapseSectionBG .collapseSectionLeftBg {
+    height: 100%;
+    /* width: 0.683rem; */
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.ContentsectionBG .collapseSectionBG::after {
+    display: block;
+    position: absolute;
+    content: "";
+    height: 1px;
+    background-color: #eee;
+    float: left;
+    left: 0.683rem;
+    right: 0px;
+    bottom: 0px;
+    ;
+}
+
+.ContentsectionBG .hideLine::after {
+    height: 0px;
+}
+
+/* 左边线和圆形 div  线*/
+
+.ContentsectionBG .collapseSectionBG .collapseSectionLeftBg .noobSection2LeftLine {
+    width: 1px;
+    height: 100%;
+    background-color: #eee;
+    position: absolute;
+    left: 0.666rem;
+}
+
+/* 左边线和圆形 div  圆*/
+
+.ContentsectionBG .collapseSectionBG .collapseSectionLeftBg .noobSection2LeftLine .noobSectionCircle {
+    position: absolute;
+    width: 0.4266rem;
+    height: 0.4266rem;
+    border-radius: 50%;
+    background-color: #FFEAE3;
+    top: 50%;
+    left: 50%;
+    margin-top: -0.2133rem;
+    margin-left: -0.2133rem;
+}
+
+.ContentsectionBG .collapseSectionBG .sectionCommonLeftTitle {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #333333;
+    letter-spacing: 0;
+    text-align: center;
+    margin-left: 1.2rem;
+}
+
+/* 右边折叠section */
+
+.sectionRightBg {
+    display: flex;
+    align-items: center;
+}
+
+/* 右边折叠section  右侧图标*/
+
+.sectionRightBg .collapseSectionYellowIcon {
+    width: 0.4266rem;
+    height: 0.4266rem;
+}
+
+.sectionRightBg .collapseSectionHongbaoIcon {
+    width: 0.48rem;
+    height: 0.48rem;
+}
+
+/* 右边折叠section  右侧箭头*/
+
+.sectionRightBg .collapseSectionArrow {
+    width: 0.48rem;
+    height: 0.48rem;
+    margin-right: 0.4rem;
+}
+
+/* 右边折叠section title 默认样式*/
+
+.sectionRightBg .collapseSectionRightCommonTitle {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FFB200;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.sectionRightBg .redRightTitle {
+    color: #EE3D42;
+}
+
+/* 展开签到列表 背景 */
+
+.ContentsectionBG .mui-collapse-content .signDetail {
+    margin-left: 1.2rem;
+    margin-right: 0.53rem;
+}
+
+/* 展开签到列表 最上面title */
+
+.ContentsectionBG .mui-collapse-content .signDetail .noobSectionProfileString {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #333333;
+    letter-spacing: 0;
+}
+
+/* 展开签到列表 最上面title */
+
+.ContentsectionBG .mui-collapse-content .signDetail .noobSectionProfileTitleBg {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 0.4rem;
+}
+
+/* 展开签到列表 最上面title 线*/
+
+.ContentsectionBG .mui-collapse-content .signDetail .noobSectionProfileTitleBg::after {
+    display: block;
+    position: absolute;
+    content: "";
+    height: 1px;
+    background-color: #eee;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+/* 展开签到列表 每一项 row*/
+
+.signRow {
+    height: 0.98rem;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+/* 展开签到列表 每一项 row  左边文字 通用样式*/
+
+.signRow .rowCommonLeft {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+}
+
+/* 展开签到列表 每一项 row  左边文字 已签到样式*/
+
+.signRow .isSign {
+    color: #999999;
+}
+
+.signRow .SignRight {
+    display: flex;
+    position: relative;
+}
+
+.signRow .SignRight .IsSignRightIcon {
+    width: 0.4rem;
+    height: 0.4rem;
+}
+
+.signRow .SignRight .isDoneSignIcon {
+    position: absolute;
+    width: 0.96rem;
+    right: -12%;
+    top: -60%;
+}
+
+/* 展开签到列表 每一项 row  右边文字 通用样式*/
+
+.signRow .SignRight .commonRight {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #FFB200;
+    letter-spacing: 0;
+}
+
+/* 展开签到列表 每一项 row  右边文字 已签到样式*/
+
+.signRow .SignRight .isSignRight {
+    color: #999999;
+}
+
+.rightBtnRowBg {
+    margin-left: 1.2rem;
+    margin-right: 0.53rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rightBtnRowBg .rightBtnRowBgLeftTitle {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #333333;
+    letter-spacing: 0;
+    margin-right: 0.8rem;
+}
+
+.rightBtnRowBg .rightBtn {
+    width: 73px;
+    height: 28px;
+    background-color: #FD4844;
+    border-radius: 28px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 28px;
+    flex-shrink: 0;
+}
+
+
+.footerPlaceholder {
+
+    width: 10rem;
+    height: 0.2rem;
+    background-color: #f5f5f5;
+}

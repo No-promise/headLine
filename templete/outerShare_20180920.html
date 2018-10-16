@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>分享</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+  <link rel="stylesheet" href="../css/outerShare.css">
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    html::-webkit-scrollbar {
+      display: none;
+    }
+
+    iframe::-webkit-scrollbar {
+      display: none;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      /* position: relative;
+    overflow-y: scroll; */
+    }
+  </style>
+</head>
+
+<body>
+  <header class="link">
+    <div class="img_box">
+      <img class="androidLogo" src="../icon/icon/appLogo.png" alt="" />
+      <img class="iosLogo" src="../icon/icon/appLogo1.png" alt="" />
+    </div>
+    <div class="shareTitle">
+      <div class="titAndroid">看点头条</div>
+      <div class="titIos">多点趣闻</div>
+      <p class="title_explain">
+        让阅读更具价值
+      </p>
+    </div>
+
+    <div class="open">
+      <div id="openApp">打开</div>
+    </div>
+  </header>
+   <div id="article"></div> 
+    <iframe src="http://mini.eastday.com/mobile/180920112336940.html?qid=qid10944&userId=1366" frameborder="0" id="test" onload="this.height=100" height="auto"></iframe>
+    
+  <!--固定红包  -->
+  <div class="share_activity">
+    <img class="openBag" src="../icon/outerLink/link_float_hongbao@2x.png" alt="" onclick="openRed()">
+  </div>
+  <!--红包弹窗  -->
+  <div class="maskPopup ">
+    <img class="closeCancle" src="../icon/outerLink/home_all_close@2x.png" alt="">
+    <div id="popUp" class="popup_bag">
+      <img src="../icon/outerLink/home_new_person_bg@2x.png" alt="">
+      <p>新人现金红包</p>
+      <p>最高<span>28</span>元</p>
+      <div class="popup_tip">
+        可提现
+      </div>
+      <img class="popup_open" src="../icon/outerLink/home_open_hongbao@2x.png" alt="">
+
+    </div>
+  </div>
+  <div class="article_label"></div>
+
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/JanesiBridges.js"></script>
+  <script src="../js/outerShare.js"></script>
+</body>
+
+</html>

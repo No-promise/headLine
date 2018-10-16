@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../css/getTipAnimation.css">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>拆红包</title>
+</head>
+<body>
+    <div class="g_wrapper">
+
+        <div class="bg">
+            <div class="userProfile">
+                <img class="avator" id="k_avator" />
+                <p class="string1" id="k_nameString"> 名字</p>
+                <p class="string2"> 给您发了一个红包</p>
+            </div>
+            <img class="redBg" src="../icon/honbao_bbg.png">
+            <img class="openBn" src="../icon/hongbao_atn.png" onclick="getMoney(this)">
+            <div class="openString">
+
+                <p onclick="getMoney(this)">点击领取</p>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://s13.cnzz.com/z_stat.php?id=1273878911&web_id=1273878911" language="JavaScript"></script>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/JanesiBridge.js"></script>
+<script src="../js/common.js"></script>
+
+<script>
+    // 隐藏站点统计
+        var s = document.getElementsByTagName("a");
+            var len = s.length;
+            s[len - 1].style.display = "none";
+    
+
+    // 获取参数
+    function getRequest() {
+        var url = location.href; //获取整个地址栏地址
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.split('?')[1]; //截取？之后的所有参数
+            str = str.split("&"); //将每个参数截取放置到数组
+            for (var i = 0; i < str.length; i++) {
+                theRequest[str[i].split("=")[0]] = unescape(str[i].split("=")[1]); //将属性及属性值分别归属到数组
+            }
+        }
+        return theRequest;
+    }
+    // 跳转链接
+    var str = location.href.split('?')[1];
+    var link = urlBase + '/web-test/zhiquFuli/templete/splitCash.html'
+    var jumpLink = link + '?' + str;
+
+    var appId = getRequest()['appId'], //获取某参数的对应参数值
+        userId = getRequest()['userId'] || getRequest()['userid'],
+        inviteCode = getRequest()['inviteCode'],
+        comeFrom = getRequest()['comeFrom'],
+        inviteWay = getRequest()['inviteWay']
+
+// 获取用户头像
+    $.ajax({
+        type: 'post',
+        data: {
+            userId:userId,
+            inviteWay:inviteWay
+        },
+        url: url + '/api/ucs/user/get',
+        success: function (e) {
+            var name = document.getElementById('k_nameString');
+            name.innerHTML = e.result.nickName;
+            var url = e.result.avator;
+            var img = document.getElementById('k_avator');
+            img.setAttribute("src", url);
+        }
+    })
+
+    $.ajax({
+        type: 'post',
+        data: {
+            comeFrom: comeFrom
+        },
+        url: url + '/app/interest/invite/way_click',
+        success: function (e) {
+
+        }
+    })
+    // 跳转领红包
+
+    window.setTimeout(function () {
+        window.location.href = jumpLink
+    }, 3000)
+
+    function getMoney (){
+        window.location.href = jumpLink
+    }
+</script>
+
+</html>

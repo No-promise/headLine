@@ -1,0 +1,546 @@
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    outline-style: none;
+    /*FF*/
+}
+
+body {
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.p_wrapper {
+    width: 100%;
+    height: 667px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #fff;
+    width: 10rem;
+    height: 5.2rem;
+}
+
+.headerBG {
+    background-color: #FF4D32;
+    width: 10rem;
+    height: 2.933333rem;
+    position: relative;
+}
+
+.headerBG .headerRightIcon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.12rem;
+    right: 0;
+    /* height: 1/16rem; */
+}
+
+.headerBG .coin {
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.headerBG .coin .additional {
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.headerBG .coin .jiahao {
+    font-family: PingFangSC-Regular;
+    font-size: 24px;
+    color: #FFFFFF;
+    letter-spacing: -0.87px;
+    text-align: center;
+}
+
+.headerBG .coin .jiahao .count {
+    font-family: PingFangSC-Regular;
+    font-size: 42px;
+    color: #FFFFFF;
+    letter-spacing: -0.87px;
+    text-align: center;
+    line-height: 33px;
+}
+
+.headFooter {
+    height: 2rem;
+    width: 10rem;
+}
+
+.headFooter .footer {
+    height: 2rem;
+    width: 3.333333rem;
+    /* padding-top: 0.533333rem; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.headFooter .footer .jiahao {
+    font-size: 10px;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.headFooter .footer .count {
+    font-size: 18px;
+    text-align: center;
+    color: #333333;
+    margin-bottom: 0;
+    font-family: PingFangSC-Regular;
+}
+
+.headFooter .footer .additional {
+    font-size: 12px;
+    text-align: center;
+    color: #AAAAAA;
+    margin-bottom: 0;
+    font-family: PingFangSC-Regular;
+}
+
+.headFooter .todayGrow {
+    float: left;
+}
+
+.headFooter .sumGrow {
+    float: left;
+    position: relative;
+}
+
+.headFooter .sumCoin {
+    float: right;
+    position: relative;
+}
+
+.footerLine {
+    height: 0.266667rem;
+    width: 10rem;
+    background-color: #F5F5F5;
+    background-size: 10rem 0.266667rem;
+}
+
+/* 今日收徒 累计收徒 累计金币 的线  样式 */
+
+.headFooter .sumGrow::before {
+    position: absolute;
+    display: block;
+    content: "";
+    width: 1px;
+    height: 0.7rem;
+    background-color: #DDDDDD;
+    float: left;
+    left: 1px;
+    top: 50%;
+    margin-top: -0.35rem;
+}
+
+.headFooter .sumCoin::before {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 1px;
+    height: 0.7rem;
+    background-color: #DDDDDD;
+    float: left;
+    left: 1px;
+    top: 50%;
+    margin-top: -0.35rem;
+}
+
+.mui-scroll-wrapper .mui-scroll {
+    position: relative !important;
+}
+
+.mui-scroll-wrapper {
+    position: relative !important;
+}
+
+p_wrapper.mui-control-content {
+    background-color: white;
+    /* min-height: 11.5rem; */
+}
+
+/* 利用 flex 撑起下部滑动试图高度 */
+
+.p_wrapper .container {
+    flex-grow: 1;
+    background-color: #fff;
+}
+
+/* 利用 flex 纵向布局  为了让 container 可以 自适应高度 */
+
+.p_wrapper .container .mui-slider {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+/* 利用 flex 撑起下部滑动试图高度 */
+
+.mui-content .mui-slider .mui-slider-group {
+    flex-grow: 1;
+}
+
+p_wrapper.mui-control-content .mui-loading {
+    margin-top: 0.666667rem;
+}
+
+/* 列表 row   */
+
+.mui-table-view .row {
+    height: 2rem;
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+/* 列表 row  头像 普通布局 */
+
+.mui-slider .mui-slider-group .mui-slider-item .mui-table-view .avatar {
+    height: 1.12rem;
+    width: 1.12rem;
+    display: inline-block;
+    background-size: 1.12rem;
+    float: left;
+    border-radius: 0.56rem;
+    top: 50%;
+    margin-left: 0.48rem;
+}
+
+/* 列表 row  头像 榜单布局 */
+
+.mui-table-view .row .avatar .isRanking {
+    /* margin-left: 1.546667rem; */
+}
+
+.mui-table-view .row .nameMobile {
+    float: left;
+    margin-left: 0.266667rem;
+}
+
+/* row p 覆盖mui样式 */
+
+.mui-slider .mui-slider-group .mui-slider-item .mui-table-view .row p {
+    margin-bottom: 0;
+}
+
+/* row p name  */
+
+.mui-slider .mui-slider-group .mui-slider-item .mui-table-view .name {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #333333;
+    letter-spacing: 0.11px;
+}
+
+/* row p mobile  */
+
+.mui-slider .mui-slider-group .mui-slider-item .mui-table-view .mobile {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #999999;
+    letter-spacing: 0;
+}
+
+/* row p order 排序默认样式  */
+
+.mui-slider .mui-slider-group .mui-slider-item .mui-table-view .order {
+    background-size: 0.64rem 0.853333rem;
+    width: 0.64rem;
+    line-height: 0.72rem;
+    height: 0.853333rem;
+    background-color: #fff;
+    text-align: center;
+    margin-left: 0.506667rem;
+}
+
+/* row p order 排序默认前三样式  */
+
+.mui-slider .mui-slider-group .mui-slider-item .mui-table-view li:nth-of-type(1) .order {
+    width: 0.64rem;
+    height: 0.853333rem;
+    background-image: url(../icon/welfare_apprentice_ranking_first.png);
+    background-size: 0.64rem 0.853333rem;
+    color: #fff;
+    margin-left: 0.506667rem;
+}
+
+.mui-slider .mui-slider-group .mui-slider-item .mui-table-view li:nth-of-type(2) .order {
+    width: 0.64rem;
+    height: 0.853333rem;
+    background-image: url(../icon/welfare_apprentice_ranking_second.png);
+    background-size: 0.64rem 0.853333rem;
+    color: #fff;
+    margin-left: 0.506667rem;
+}
+
+.mui-slider .mui-slider-group .mui-slider-item .mui-table-view li:nth-of-type(3) .order {
+    width: 0.64rem;
+    height: 0.853333rem;
+    background-image: url(../icon/welfare_apprentice_ranking_third.png);
+    background-size: 0.64rem 0.853333rem;
+    color: #fff;
+    margin-left: 0.506667rem;
+}
+
+/* 累计贡献 div */
+
+.mui-table-view .row .sumGrow {
+    float: right;
+    margin-right: 0.453333rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* 累计贡献 下部文字 */
+
+.mui-table-view .row .sumGrow .addition {
+    text-align: right;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #BBBBBB;
+    letter-spacing: 0;
+}
+
+/* 累计贡献 数字div */
+
+.mui-table-view .row .sumGrow .sumCount {
+    text-align: right;
+    display: flex;
+    flex-direction: row-reverse;
+    line-height: 0.466667rem;
+}
+
+/* 累计贡献 数字 icon */
+
+.mui-table-view .row .sumGrow .sumCount .icon {
+    width: 0.36rem;
+    right: 0;
+    height: 0.39rem;
+}
+
+/* 累计贡献 数字 + */
+
+.mui-table-view .row .sumGrow .sumCount .jiahao {
+    text-align: right;
+    color: #FD4844;
+    font-size: 14px;
+}
+
+/* 累计贡献 数字 */
+
+.mui-table-view .row .sumGrow .sumCount .count {
+    text-align: right;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FD4844;
+    letter-spacing: 0;
+}
+
+/* 累计贡献 row下部的线  */
+
+.mui-table-view .row .line {
+    background-color: #EEEEEE;
+    height: 1px;
+    width: 95%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.mui-table-view .empty {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mui-table-view .empty .emptyBG {
+    background-image: url(../icon/welfare_apprentice_person_none@2x.png);
+    background-size: 2.69rem 2.69rem;
+    width: 2.69rem;
+    height: 2.69rem;
+    margin-top: 1.12rem;
+    margin-bottom: 0.4rem;
+}
+
+.mui-table-view .empty .ranking {
+    background-image: url(../icon/welfare_apprentice_prize_none@2x.png);
+    background-size: 2.69rem 2.69rem;
+    width: 2.69rem;
+    height: 2.69rem;
+}
+
+.mui-table-view .empty .emptyTopString {
+    color: #999999;
+    font-size: 14px;
+}
+
+.mui-table-view .empty .emptyLeftString {
+    color: #999999;
+    font-size: 14px;
+}
+
+.mui-table-view .empty .emptyRigString {
+    color: #FF4D32;
+    font-size: 14px;
+}
+
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+    background-color: #fff;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #333333 !important;
+    letter-spacing: -0.87px;
+    text-decoration: none;
+    line-height: 1.4rem;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #999999 !important;
+    letter-spacing: -0.87px;
+    text-decoration: none;
+    line-height: 1.4rem;
+}
+
+.mui-slider-indicator.mui-segmented-control {
+    background-color: #fff;
+}
+
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.mui-slider .mui-slider-progress-bar1 {
+    overflow: visible;
+    /* content: ""; */
+    width: 100%;
+    height: 1px;
+    background-color: #eee;
+    float: left;
+}
+
+@keyframes moveRight {
+    0% {
+        left: 22%;
+    }
+    100% {
+        left: 73%;
+    }
+}
+
+@keyframes moveLeft {
+    0% {
+        left: 73%;
+    }
+    100% {
+        left: 22%;
+    }
+}
+
+.mui-slider .mui-slider-progress-bar1 .sliderLine {
+    position: absolute;
+    background-color: #FF3D04;
+    width: 20px;
+    height: 2px;
+    left: 22%;
+    bottom: 0px;
+}

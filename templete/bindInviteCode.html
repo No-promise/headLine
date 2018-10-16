@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link href="../css/bindInviteCode.css" rel="stylesheet" />
+    
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>邀请码</title>
+</head>
+
+<body>
+
+    <div class="b_wrapper">
+
+        <div class="bg">
+
+            <div class="codeTitle"><p class="codeTp"> &nbsp;绑定的邀请码&nbsp; </p></div>
+            <div class="codebg" id="k_code">
+                
+            </div>
+        </div>
+    </div>
+<span style="display:none">
+    <script src="https://s13.cnzz.com/z_stat.php?id=1273878911&web_id=1273878911" language="JavaScript"></script>
+</span>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/JanesiBridges.js"></script>
+
+
+<script>
+
+
+window.onload = function(){
+    // 全局定义请求地址
+    window.JanesiApi.reqUrl = requestUrl;
+
+    // 获取邀请码
+    var reqApi = '/api/ucs/user/invite_code';
+    window.JanesiApi.sendApi(reqApi, 'post', reqParams, function (res) {
+        if (res.code == 0) {
+
+            var k_codeBg = document.getElementById("k_code");
+            k_codeBg.innerHTML = res.result;
+        }
+    })
+}
+
+
+
+
+    
+</script>
+
+</html>

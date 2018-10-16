@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>问卷调查</title>
+		<style>
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				position: relative;
+			}
+			/* 完结弹框 */
+			.getCoin{
+				position: absolute;
+				top:0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				min-height: 16.37rem;
+				background-color: #FD4844;
+				padding: 0.6rem;
+				  display: none;  
+				 /* display: block;  */
+				box-sizing: border-box;
+
+			}
+			.coin{
+				position: relative;
+				width:8.8rem;
+			}
+			.coin_bg{
+				width:8.8rem;
+				display: block;
+				margin-top:1rem;
+			}
+			.coin_black{
+				position: absolute;
+				top:2rem;
+				left:0;
+				right: 0;
+				text-align: center;
+				font-family: PingFangSC-Regular;
+				font-size: 24px;
+				color: #333333;
+				letter-spacing: 0;
+			}
+			.coin_black_red{
+				color:#FD4844;
+				font-size: 42px;
+				font-weight: bold;
+			}
+			.coin_tip{
+				position: absolute;
+				top:8.45rem;
+				left:0;
+				right: 0;
+				font-family: PingFangSC-Regular;
+				font-size: 16px;
+				color: #333333;
+				letter-spacing: 0;
+				text-align: center;
+				
+			}
+			.coin_award{
+				position: absolute;
+				top:9rem;
+				left:0;
+				right: 0;
+				font-family: PingFangSC-Semibold;
+				font-size: 20px;
+				color: #151515;
+				letter-spacing: 0;
+				text-align: center;
+				line-height: 22px;
+				
+			}
+			.coin_award_red{
+				font-family: PingFangSC-Semibold;
+				font-size: 20px;
+				color: #FD4844;
+				letter-spacing: 0;
+				text-align: center;
+				line-height: 22px;
+			}
+			.subBtn{
+				position: absolute; 
+				top:11rem;
+				left:0.58rem;
+				width: 7.46rem;
+				height: 1.3rem;
+				background-color: #FFDF01;
+				color:#CF0807 ;
+				line-height: 1.3rem;
+				font-size: 22px;
+				border-radius:32px;
+				text-align: center;
+			}
+			/*弹框  */
+			.top_content img {
+				width: 10rem;
+			}
+			
+			.tipNum {
+				color: #333;
+				font-size: 21px;
+				text-align: center;
+				margin: 0.67rem 0 0.53rem 0;
+			}
+			
+			.content {
+				padding: 0 0.72rem 0 0.75rem;
+			}
+			
+			.question {
+				color: #333;
+				font-size: 16px;
+				font-family: PingFangSC-Semibold;
+				margin-bottom: 0.53rem;
+			}
+			
+			.firstQues1,
+			.firstQues2,
+			.firstQues3,
+			.firstQues4 {
+				width: 8.5rem;
+				height: 1.2rem;
+				border: 1px solid #E0E0E0;
+				border-radius: 0.21rem;
+				margin-bottom: 0.27rem;
+			}
+			
+			.quesRadio+label {
+				font-size: 16px;
+				color: #333;
+				line-height: 1.25rem;
+			}
+ 			
+			 .previous{
+				width:8.53rem;
+				border-radius: 0.75rem;
+				margin: 0 auto;
+				text-align: center;
+				color: #4A90E2;
+				font-size: 14px;
+				/* background-color: #FD4844; */
+			}  
+			.block_blank{
+				width: 100%;
+				height: 1.06rem;
+			}
+			.next{
+				width:8.53rem;
+				height:1.2rem;
+				line-height: 1.2rem;
+				border-radius: 0.75rem;
+				margin: 0 auto;
+				margin-top:1rem;
+				text-align: center;
+				color: #fff;
+				font-size: 16px;
+				margin-bottom:0.8rem;
+				background-color: #FD4844;
+			}
+			/*选择样式  */
+			input[type="radio"] + label::before {
+				content: "\a0"; /*不换行空格*/
+				display: inline-block;
+				 vertical-align: middle; 
+				width: 0.4rem;
+				height: 0.4rem;
+				margin-left: 0.53rem;
+				margin-right: 0.18rem;
+				margin-bottom: 0.08rem;
+				border-radius: 50%;
+				border: 1px solid #979797;
+			}
+			input[type="radio"]:checked + label::before {
+				content: '\a0';
+				display: inline-block;
+				 background: url('../icon/research_choose.png'); 
+				   background-size:0.43rem 0.43rem;    
+				border: 1px solid #fd4844;
+				
+			}
+			input[type="radio"] {
+				position: absolute;
+				clip: rect(0, 0, 0, 0);
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<!--完结弹框  -->
+		 <div class="getCoin">
+			 <div class="coin">
+				<img class="coin_bg" src="../icon/search_bg.png" alt="">
+				<p class="coin_black">获得<span class="coin_black_red">100</span>金币</p>
+				<p class="coin_tip">收徒赚翻天</p>
+				<p class="coin_award"><span class="coin_award_red">徒弟越多</span>，现金奖励越高</p>
+				<div class="subBtn" onclick="submitBtn()">
+					马上收徒
+				</div>
+			 </div>
+			
+		</div> 
+		<!--弹框完结  -->
+		 <div class="top_content">
+			<img src="../icon/research_banner.png" alt="">
+		</div> 
+		<div class="content">
+			
+
+		</div>
+		<div class="btn">
+			
+			<div class="next">下一题</div>
+			<div class="previous">返回上一题>></div>
+			<div class="block_blank"></div>
+		</div>
+		
+
+	</body>
+	<script src="../js/jquery-2.1.1.min.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/JanesiBridges.js"></script> 
+
+	
+	<script>
+		
+
+		var content = [
+			{
+				'number': '1/5',
+				'questionNum':'1',
+				'title': '以下称呼中哪个最符合您的形象？',
+				'list': [
+					{
+						'id': '1',
+						'name':'feature1',
+						'answer': '帅气小哥',
+					},
+					{
+						'id': '2',
+						'name':'feature1',
+						'answer': '时尚小妹',
+					},
+					{
+						'id': '3',
+						'name':'feature1',
+						'answer': '成熟大叔',
+					},
+					{
+						'id': '4',
+						'name':'feature1',
+						'answer': '知心大姐',
+					}
+				]
+			},
+			{
+				'number': '2/5',
+				'questionNum':'2',				
+				'title': '敢问英雄来自何方？',
+				'list': [
+					{
+						'id': '5',
+						'name':'feature2',
+						'answer': '北上广深一线城市',
+					},
+					{
+						'id': '6',
+						'name':'feature2',
+						'answer': '各省会，长三角及珠三角等二线城市',
+					},
+					{
+						'id': '7',
+						'name':'feature2',
+						'answer': '三线及以下地级市',
+					},
+					{
+						'id': '8',
+						'name':'feature2',
+						'answer': '县城，乡镇等农村地区',
+					}
+				]
+			},
+			{
+				'number': '3/5',
+				'questionNum':'3',
+				'title': '您平时更喜欢看的类型是？',
+				'list': [
+					{
+						'id': '9',
+						'name':'feature3',
+						'answer': '文章',
+					},
+					{
+						'id': '10',
+						'name':'feature3',
+						'answer': '小视频',
+					},
+					{
+						'id': '11',
+						'name':'feature3',
+						'answer': '长视频',
+					},
+					{
+						'id': '',
+						'answer': '',
+					}
+				]
+			},
+			{
+				'number': '4/5',
+				'questionNum':'4',
+				'title': '您每天使用手机的时长是？',
+				'list': [
+					{
+						'id': '12',
+						'name':'feature4',
+						'answer': '2小时以内',
+					},
+					{
+						'id': '13',
+						'name':'feature4',
+						'answer': '2小时左右',
+					},
+					{
+						'id': '14',
+						'name':'feature4',
+						'answer': '4小时左右',
+					},
+					{
+						'id': '15',
+						'name':'feature4',
+						'answer': '4小时以上',
+					}
+				]
+			},
+			{
+				'number': '5/5',
+				'questionNum':'5',
+				'title': '您对于看点头条啥最不满意？',
+				'list': [
+					{
+						'id': '16',
+						'name':'feature5',
+						'answer': '赚钱少',
+					},
+					{
+						'id': '17',
+						'name':'feature5',
+						'answer': '内容差',
+					},
+					{
+						'id': '18',
+						'name':'feature5',
+						'answer': '用户体验差',
+					},
+					{
+						'id': '',
+						'answer': '',
+					}
+				]
+			},
+		]
+
+
+		var first=getTemplete(content[0]);
+		document.querySelector('.content').innerHTML=first;
+
+		function getTemplete(content) {
+
+			if(content.list[3].id){
+				var template=`
+			<p class="tipNum">${content.number}</p>
+			<p class="question" id="${content.questionNum}">${content.title}</p>
+			<div class="firstQues1 radioDiv">
+				<input type="radio" name="${content.list[0].name}" id="${content.list[0].id}" class="quesRadio" value="" />
+				<label for="handsome">${content.list[0].answer}</label>
+			</div>
+			<div class="firstQues2 radioDiv">
+				<input type="radio" name="${content.list[1].name}" id="${content.list[1].id}" class="quesRadio" value="" />
+				<label for="fashion">${content.list[1].answer}</label>
+			</div>
+			<div class="firstQues3 radioDiv">
+				<input type="radio" name="${content.list[2].name}" id="${content.list[2].id}" class="quesRadio" value="" />
+				<label for="mature">${content.list[2].answer}</label>
+			</div>
+			<div class="firstQues4 radioDiv">
+				<input type="radio" name="${content.list[3].name}" id="${content.list[3].id}" class="quesRadio" value=""/>
+				<label for="confidant">${content.list[3].answer}</label>
+			</div>
+		`;
+		return template
+		
+			}else {
+				var template=`
+			<p class="tipNum">${content.number}</p>
+			<p class="question" id="${content.questionNum}">${content.title}</p>
+			<div class="firstQues1 radioDiv">
+				<input type="radio" name="${content.list[0].name}" id="${content.list[0].id}" class="quesRadio" value="" />
+				<label for="handsome" onclick='getClass(this)'>${content.list[0].answer}</label>
+			</div>
+			<div class="firstQues2 radioDiv">
+				<input type="radio" name="${content.list[1].name}" id="${content.list[1].id}" class="quesRadio" value="" />
+				<label for="fashion">${content.list[1].answer}</label>
+			</div>
+			<div class="firstQues3 radioDiv">
+				<input type="radio" name="${content.list[2].name}" id="${content.list[2].id}" class="quesRadio" value="" />
+				<label for="mature">${content.list[2].answer}</label>
+			</div>		
+		`;
+		return template;
+		}
+			}
+		
+
+		 
+	
+	var questionId = ''
+	var answerId = ''
+		// 将id放入数组arr
+		var arr = [];
+		function getArr(value){
+			
+			var isContain = false;
+			var index = 0;
+			for (var i = 0; i < arr.length;i++){
+
+				var selectItem = arr[i];
+				if(value.questionId == selectItem.questionId){
+					isContain = true;
+					index = i;
+					break;
+				}
+			}
+			if (isContain){
+
+				arr[index] = value;
+			}else{
+				arr.unshift(value);
+
+			}
+ 		}
+		// 将选项从arr中拿出 并设置选中状态
+		
+		function opptionStatus() {
+
+				for (var j = 0; j < arr.length; j++) {
+					$('input[type=radio][id=' + arr[j].answerId + ']').prop('checked', true);
+					$('').prop("checked",true)
+					$('input[type=radio][id=' + arr[j].answerId + ']').parent().css({'background':'#fff','borderColor':'#E0E0E0'});
+					$('input[type=radio][id=' + arr[j].answerId + ']').parent().css({'background':'#FFE7E6','borderColor':'#FFE7E6'})
+
+				}
+			}
+// 第一页选中 并添加到数组
+		opptionRadio();
+		function opptionRadio(){
+			$('.radioDiv').click(function () {
+				var obj = {}
+				questionId = $(this).siblings('.question').attr('id');
+				answerId = $(this).children('.quesRadio').attr('id')
+				obj.questionId = questionId;
+				obj.answerId = answerId;
+				getArr(obj);
+
+				var $radio = $(this).find("input[type=radio]"),
+			
+					$flag = $radio.is(":checked");
+					
+				
+				if (!$flag) {
+					$radio.prop("checked", true);
+					$('input[type=radio]').parent().css({'background':'#fff','borderColor':'#E0E0E0'});
+					$(this).css({'background':'#FFE7E6','borderColor':'#FFE7E6'});
+
+
+				}
+			});
+
+			$('input[type=radio]').change(function() {
+			$('input[type=radio]').parent().css({'background':'#fff','borderColor':'#E0E0E0'});
+			console.log($('input[type=radio]').parent());
+						console.log(111,$(this).parent());
+
+			$(this).parent().css({'background':'#FFE7E6','borderColor':'#FFE7E6'})
+
+			// 声明一个对象
+			var obj = {}
+			questionId = $(this).parent().siblings('.question').attr('id');
+			answerId = $(this).attr('id')
+			obj.questionId = questionId;
+			obj.answerId = answerId;
+
+			getArr(obj);
+
+    	});
+		}
+
+
+		
+		// 下一题
+		var next=document.querySelector('.next');
+		var i=0;
+		
+		next.onclick=function(){
+			for(var k =0;k<arr.length;k++){
+				if(arr[k].questionId==i+1){
+					if (i < 4) {
+						i = i + 1;
+						if (i < content.length) {
+							if (i == content.length - 1) {
+								next.innerHTML = '完成';
+							}
+								var template = getTemplete(content[i])
+								document.querySelector('.content').innerHTML = template;
+								opptionRadio();
+								opptionStatus();
+							
+						}else {
+							return;
+						}
+					}else if(i == 4){
+						console.log(arr)
+						var arrString = JSON.stringify(arr);
+
+						// 全局定义请求地址
+							window.JanesiApi.reqUrl = requestUrl;
+
+							// 获取邀请码
+							var reqApi = '/app/interest/task/answer_save';
+							window.JanesiApi.sendApi(reqApi, 'post', {
+								// 'userId': userId,
+								'answer': arrString
+								
+							}, function (result) {
+								if(result.code==0){
+									$('.getCoin').css('display','block');
+								}
+							})
+						
+					}
+				}
+			}
+				
+		}
+		var teacherLink = {
+				'url': urlBase + '/janesi-headline/ZQFL/templete/teacherAndPupil.html'
+			}
+
+		function submitBtn(){
+			console.log(teacherLink);
+			window.JanesiBridge.callNative('open',teacherLink);
+
+		}
+
+		// 上一题
+		var previous=document.querySelector('.previous');
+		previous.onclick = function(){
+			if (i > 0) {
+				i = i - 1;
+				if (i > -1) {
+					next.innerHTML = '下一题'
+					var template = getTemplete(content[i])
+					document.querySelector('.content').innerHTML = template;
+					opptionRadio();
+					opptionStatus();
+				} else {
+					return;
+				}
+			}else{
+				return;
+			}
+			
+		}
+		
+	</script>
+
+</html>
