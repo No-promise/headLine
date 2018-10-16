@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>赚钱攻略</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .recordContent{
+           
+        }
+        .readtask,.videoTask,.timeTask{
+             padding:0 0.9rem 0 1rem;
+             position: relative;
+        }
+        .list{
+            height: 1.46rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;    
+        }
+        .listLeft{
+            font-family: PingFangSC-Semibold;
+            font-size: 0.43rem;
+            color: #333333;
+            letter-spacing: 0;
+            position: relative;
+        }
+        .listLeft::before{
+            content: '';
+            width: 0.22rem;
+            height: 0.22rem;
+            border-radius: 50%;
+            background: #C7C7C7;
+            position: absolute;
+            top:50%;
+            margin-top:-0.11rem;
+            left: -0.35rem;
+
+        }
+        .listRight{
+            display: flex;
+            align-items: center;
+        }
+        .listOne{
+            width: 0.48rem;
+            height: 0.56rem;
+            margin-right: 0.05rem;
+            padding-top:0.12rem;
+        }
+        .listRight p{
+            font-size: 0.32rem;
+            color:#666;
+        }
+        .listRight .goldNum1,
+        .listRight .goldNum2,
+        .listRight .goldNum3{
+            font-size: 0.56rem;
+            color:#FD4844;
+        }
+        .listRight .goldCoin{
+            font-size: 0.32rem;
+            color:#FD4844;
+        }
+        .listBottom{
+            font-family: PingFangSC-Regular;
+            font-size: 0.37rem;
+            color: #666666;
+            letter-spacing: 0;
+            line-height: 0.5rem;
+            margin-bottom: 0.4rem;
+            
+        }
+        .listBottom::after{
+            position: absolute;
+            right: 0;
+            left: 0;
+            height: 0.5px;
+            content: '';
+            -webkit-transform: scaleY(.5);
+            transform: scaleY(.5);
+            background-color: #ddd;
+            bottom: -0.4rem;
+        }
+        .readTaskStatus,.videoTaskStatus,.timeTaskStatus{
+            width: 1.54rem;
+            height: 1.56rem;
+            position: absolute;
+            top:-2px;
+            right:0;
+        }
+        .earningsTask{
+            position: absolute;
+            height: 1.33rem;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            padding: 0 0.32rem 0 0.45rem;
+            display: flex;  
+            justify-content:space-between;
+            align-items:center;
+        }
+        .earningsTask::before{
+            position: absolute;
+            right: 0;
+            left: 0;
+            height: 0.5px;
+            content: '';
+             -webkit-transform: scaleY(.5);
+            transform: scaleY(.5);
+            background-color: #ddd;
+            top:0;
+        }
+        .earningsLeft{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .earningsLeft p{
+            font-family: PingFangSC-Regular;
+            font-size: 0.37rem;
+            color: #333333;
+            letter-spacing: 0;
+        }
+        .earningsLeft .earningsNUm{
+            font-family: PingFangSC-Semibold;
+            font-size: 0.586rem;
+            color: #FD4844;
+            letter-spacing: 0;
+        }
+        .earningsCoin{
+            width: 0.61rem;
+            height: 0.69rem;
+            margin-right: 0.05rem;
+        }
+        .earningsRight{
+            width: 2.1rem;
+            height: 0.8rem;
+            line-height: 0.8rem;
+            text-align: center;
+            background-color: #FD4844;
+            border-radius: 2.1rem;
+            font-family: PingFangSC-Regular;
+            font-size: 0.37rem;
+            color: #FFFFFF;
+            letter-spacing: 0.11px;
+        }
+    </style>
+</head>
+<body>
+    <!--阅读  -->
+    <div class="recordContent">
+        <div class="readtask">
+            <div class="list">
+                <p class="listLeft">阅读收益</p>
+
+                <div class="listRight">
+                    <img class="listOne" src="../icon/article_jinbi_list.png" alt="">
+                    <p>已赚<span class="goldNum1">0</span><span class="goldCoin">金币</span></p>
+                </div>
+            </div>
+            <div class="listBottom">
+                阅读资讯20秒以上，即可获得10金币奖励，最高200金币
+            </div>
+            <img class="readTaskStatus" src="../icon/article_money_none.png" alt="">
+        </div>
+        
+        <!--视频  -->
+        <div class="videoTask">
+            <div class="list">
+                <p class="listLeft">看视频收益</p>
+
+                <div class="listRight">
+                    <img class="listOne" src="../icon/article_jinbi_list.png" alt="">
+                    <p>已赚<span class="goldNum2">0</span><span class="goldCoin">金币</span></p>
+                </div>
+            </div>
+            <div class="listBottom">
+                观看视频30秒以上即可获得5金币奖励，最高100金币
+            </div>
+            <img class="videoTaskStatus" src="../icon/article_money_none.png" alt="">
+        </div>
+        <!--阅读时长  -->
+        <div class="timeTask">
+            <div class="list">
+                <p class="listLeft">阅读时长大奖</p>
+
+                <div class="listRight">
+                    <p>已读<span class="goldNum3">0</span><span class="goldCoin">分钟</span></p>
+                </div>
+            </div>
+            <div class="listBottom">
+                累计阅读资讯满30分钟，额外奖励300金币奖励
+            </div>
+            <img class="timeTaskStatus" src="../icon/article_money_none.png" alt="">
+        </div>
+        <!--今日收益  -->
+        <div class="earningsTask">
+            <div class="earningsLeft">
+                <p>今日总收益：</p>
+                <img class="earningsCoin" src="../icon/home_article_jinbi_today.png" alt="">
+                <p class="earningsNUm">0</p>
+            </div>
+            <div class="earningsRight">
+                查看钱包
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/common.js"></script>
+ <script src="../js/JanesiBridges.js"></script> 
+<script>
+
+
+    window.onload = function () {
+            // 全局定义请求地址
+            window.JanesiApi.reqUrl = requestUrl;
+
+
+            // 获取任务状态
+            var reqApi = '/app/interest/task/complete_info';
+            window.JanesiApi.sendApi(reqApi, 'post', reqParams, function (res) {
+                var e = res.result;
+                if (e.readComplete == 1) {
+                    document.querySelector('.readTaskStatus').src = '../icon/article_money_fin.png'
+                }
+                if (e.watchComplete == 1) {
+                    document.querySelector('.videoTaskStatus').src = '../icon/article_money_fin.png';
+                }
+                if (e.maxTimeComplete == 1) {
+                    document.querySelector('.timeTaskStatus').src = '../icon/article_money_fin.png'
+                }
+                console.log(e);
+                document.querySelector('.goldNum1').innerHTML = e.readCoins;
+                document.querySelector('.goldNum2').innerHTML = e.watchCoins;
+                document.querySelector('.goldNum3').innerHTML = e.readDuration;
+                document.querySelector('.earningsNUm').innerHTML = e.sumCoins;
+
+            })
+        }
+     var lookBag = document.querySelector('.earningsRight');
+    // 进入钱包页面
+        lookBag.onclick = function(){
+            window.JanesiBridge.callNative('open',{'page':'app_money'});
+        }
+</script>
+</html>

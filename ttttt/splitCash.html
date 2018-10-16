@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <link rel="stylesheet" href="../css/mui.min.css" />
+    <link rel="stylesheet" href="../css/swiper-4.2.6.min.css">
+    <link rel="stylesheet" href="../css/splitCash.css">
+    <title></title>
+</head>
+
+<body>
+    <!--动画  -->
+    <div class="animate scrollbox">
+        <img class="redBg" src="../icon/honbao_bbg.png">
+        <div class="bg">
+            <div class="userProfile">
+                <img class="avator" id="k_avator" src="../imgIcon/5.jpg" />
+                <p class="string1" id="k_nameString"> 名字</p>
+                <p class="string2"> 给您发了一个红包</p>
+            </div>
+
+            <img class="openBn" src="../icon/hongbao_atn.png" onclick="getMoney(this)">
+            <div class="openString">
+
+                <p onclick="getMoney(this)">点击领取</p>
+            </div>
+        </div>
+    </div>
+    <!--内容  -->
+    <div id="split">
+        <div class="wrapper">
+            <div class="topBanner">
+                <p class="tip">您的现金红包已到账</p>
+                <p class="redFont">最高&nbsp;
+                    <span class="bigTip">28</span>&nbsp;
+                    <span class="bigRed">元</span>
+                </p>
+                <div class="bannerIcon">可提现</div>
+                <img class="bannerBg" src="../icon/tixian_top.png" alt="">
+            </div>
+            <div class="bgGray">
+                <img class="redBag" src="../icon/tixian_hongbao.png" alt="">
+                <div class="textFont">
+                    <p class="redfonts">现金大放送狂赚2亿</p>
+                    <p class="tipFont">请打开"看点头条APP"查看</p>
+                </div>
+                <div class="fixTop">
+                    <img class="rightIcon" src="../icon/tixian_join@2x.png" alt="">
+                </div>
+            </div>
+            <!--输入验证码  -->
+            <div class="verification">
+                <div class="phone">
+                    <input id="tel" type="text" placeholder="输入手机号领取" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="11" oninput="contentEdit(this.value)">
+                </div>
+                <div class="telCode clearfloat">
+                    <input class="verifys" type="text" placeholder="请输入验证码" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="4">
+                    <input type="button" class="btn send" id="btn" onclick="sendCodeAction(this)" value="发送验证码" />
+
+                </div>
+                <div class="bttn" onclick="submitVerify(this)">
+                    <img src="../icon/cash_atn@2x.png" alt="">
+                    <p>提现秒到账</p>
+                </div>
+            </div>
+        </div>
+        <div class="bar"></div>
+        <div class="scrollBox">
+            <div>
+                <div class="rLine"></div>
+                <p>看看大家的手气</p>
+                <div class="lLine"></div>
+            </div>
+
+            <div class="top" id="k_top">
+                <img id="avator" src="../imgIcon/1.jpg" alt="">
+                <div class="info">
+                    <p id="nickName">李海海</p>
+                    <p id="phone">182****3640</p>
+                </div>
+                <div class="dollor">
+                    26.8元
+                </div>
+            </div>
+            <div class="rolling">
+                <div class="swiper-container" id="k_swiper_container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="top">
+                                <img src="../imgIcon/2.png" alt="">
+                                <div class="info">
+                                    <p>蒲公英</p>
+                                    <p>177****9687</p>
+                                </div>
+                                <div class="dollor">
+                                    18.6元
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="top">
+                                <img src="../imgIcon/3.png" alt="">
+                                <div class="info">
+                                    <p>李十九</p>
+                                    <p>187****9652</p>
+                                </div>
+                                <div class="dollor">
+                                    22.9元
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="top">
+                                <img src="../imgIcon/14.png" alt="">
+                                <div class="info">
+                                    <p>A雪洋冻品～</p>
+                                    <p>188****4786</p>
+                                </div>
+                                <div class="dollor">
+                                    20.9元
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="top">
+                                <img src="../imgIcon/5.jpg" alt="">
+                                <div class="info">
+                                    <p>丫的吃货</p>
+                                    <p>178****4853</p>
+                                </div>
+                                <div class="dollor">
+                                    15.9元
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="top">
+                                <img src="../imgIcon/6.jpg" alt="">
+                                <div class="info">
+                                    <p>Catherine</p>
+                                    <p>182****3640</p>
+                                </div>
+                                <div class="dollor">
+                                    19.8元
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="top">
+                                <img src="../imgIcon/7.jpg" alt="">
+                                <div class="info">
+                                    <p>陈瘦瘦</p>
+                                    <p>183****5659</p>
+                                </div>
+                                <div class="dollor">
+                                   22.9元
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="top">
+                                <img src="../imgIcon/8.jpg" alt="">
+                                <div class="info">
+                                    <p>易燃易爆炸。</p>
+                                    <p>136****8431</p>
+                                </div>
+                                <div class="dollor">
+                                   11.1元
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="top">
+                                <img src="../imgIcon/9.jpeg" alt="">
+                                <div class="info">
+                                    <p>Autism</p>
+                                    <p>158****8592</p>
+                                </div>
+                                <div class="dollor">
+                                    18.4元
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="top">
+                                <img src="../imgIcon/10.jpeg" alt="">
+                                <div class="info">
+                                    <p>再与慢</p>
+                                    <p>182****4861</p>
+                                </div>
+                                <div class="dollor">
+                                   24.1元
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="top">
+                                <img src="../imgIcon/13.jpg" alt="">
+                                <div class="info">
+                                    <p>北街九命猫</p>
+                                    <p>176****3850</p>
+                                </div>
+                                <div class="dollor">
+                                    19.8元
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alertBG shouldHidden" id="k_alertBg">
+
+        <div class="alertContent">
+            <p class="alertTitle">请输入下方图形验证码</p>
+            <div class='alertCode' id="k_alertCode"> </div>
+            <input class='inputCode' id="k_code_input"> </input>
+            <div class="verfyDoneBtn" id="k_verfyDoneBtn"> 提交</div>
+        </div>
+    </div>
+    <script src="https://s13.cnzz.com/z_stat.php?id=1273878911&web_id=1273878911" language="JavaScript"></script>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/swiper-4.2.6.min.js"></script>
+<script src="../js/gVerify.js"></script>
+<script src="../js/common.js"></script>
+
+<script type="text/javascript" src="http://res.cdn.openinstall.io/openinstall.js"></script>
+<script type="text/javascript" src="http://yun.janesi.net/web/common/js/wake_down.js"></script>
+<script>
+    // 隐藏站点统计
+        var s = document.getElementsByTagName("a");
+            var len = s.length;
+            s[len - 1].style.display = "none";
+
+    //动画
+		$('html,body').addClass('scrollbox'); //使网页不可滚动
+
+		window.setTimeout(function() {
+			$('.animate').css('display', 'none');
+			$('html,body').removeClass('scrollbox'); //使网页恢复可滚动
+
+		}, 3000)
+
+		function getMoney() {
+			$('.animate').css('display', 'none');
+			$('html,body').removeClass('scrollbox');
+		}
+            
+    window.onload = function () {
+
+        var rowHeight = document.getElementById('k_top').offsetHeight;
+        var realHeight = rowHeight * 2;
+        console.log('realHeight', realHeight);
+        var swiper = new Swiper('.swiper-container', {
+            direction: 'vertical',
+            slidesPerView: 2,
+            loop: true,
+            height: realHeight,
+            autoplay: {
+                delay: 1000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    }
+
+    var ctime;
+
+    function contentEdit(text) {
+
+        if (text.length == 11) {
+
+            var val = document.getElementById('btn');
+            val.removeAttribute("disabled");
+            val.value = "发送验证码";
+            time = origTime;
+            if (ctime) {
+                clearTimeout(ctime);
+            }
+        }
+    }
+    // 获取地址栏的参数
+    function getRequest() {
+        var urls = location.href; //获取整个地址栏地址
+        var theRequest = new Object();
+        if (urls.indexOf("?") != -1) {
+            var str = urls.split('?')[1]; //截取？之后的所有参数
+            str = str.split("&"); //将每个参数截取放置到数组
+            for (var i = 0; i < str.length; i++) {
+                theRequest[str[i].split("=")[0]] = unescape(str[i].split("=")[1]); //将属性及属性值分别归属到数组
+            }
+        }
+        return theRequest;
+    }
+
+    
+//获取某参数的对应参数值
+    // var appId = getRequest()['appId'],
+    userId = getRequest()['userId'] || getRequest()['userid'],
+    inviteCode = getRequest()['inviteCode'],
+    comeFrom = getRequest()['comeFrom'],
+    inviteWay = getRequest()['inviteWay']
+    console.log(requestUrl)
+
+    $.ajax({
+        type: 'post',
+        data: {
+            userId: userId,
+            inviteWay: inviteWay
+        },
+        url: requestUrl + '/api/ucs/user/get',
+        success: function (e) {
+            console.log(e)
+            document.querySelector('#avator').src = e.result.avator;
+            document.querySelector('#nickName').innerHTML = e.result.nickName;
+            document.querySelector('#phone').innerHTML = e.result.phone;
+        }
+    })
+    // 用户下载
+    function submitVerify() {
+        var tel = document.querySelector('#tel').value;
+        var verify = document.querySelector('.verifys').value;
+
+        $.ajax({
+            type: 'post',
+            data: {
+                appId: appId,
+                phone: tel,
+                verify: verify,
+                referrerId: userId,
+                inviteCode: inviteCode,
+                comefrom: comeFrom
+            },
+            url: requestUrl + '/api/ucs/login/register',
+            success: function (e) {
+                if (e.code == 0) {
+                    mui.toast('注册成功');
+                    setTimeout(function () {
+                        window.location.href =
+                            'http://yun.janesi.com/web/NEWS/newActivity/android.html '
+                    }, 2000);
+                } else if (e.code >= 9000 && e.code < 10000) {
+                    mui.toast(e.msg);
+                    setTimeout(function () {
+                        window.location.href =
+                            'http://yun.janesi.com/web/NEWS/newActivity/android.html '
+                    }, 2000);
+                } else {
+                    mui.toast(e.msg);
+                }
+            }
+        })
+    }
+
+    // 几次短信验证之后展示图形验证码
+    var countDown = 2;
+    //实例化一次验证码插件
+    var verifyCodeModule;
+    //倒计时原始值
+    var origTime = 60;
+    var time = origTime;
+    // 点击发送验证码事件
+    function sendCodeAction(btn) {
+
+        var tel = document.querySelector('#tel').value;
+        var reg = /^0?1\d{10}$/;
+        if (reg.test(tel)) {
+			$.ajax({
+				type:'get',
+				data:{
+					appId:appId,
+					phone:tel 
+				},
+				url:requestUrl+'/api/ucs/user/whether_regist',
+				success: function(e){
+					if (e.code == '0') {
+                        if (e.result == false) {
+                            if (countDown == 0) {
+                                showVerifyCode();
+                            } else {
+                                getVerify();
+                            }
+                        } else {
+                            mui.toast('您的手机已注册');
+                            setTimeout(function () {
+                                    window.location.href ='http://yun.janesi.com/web/NEWS/newActivity/android.html '
+                                }, 2000);
+                        }
+                    }
+					
+				}
+				
+			})
+            
+        } else {
+
+        };
+
+    }
+    // 获取验证码
+    function getVerify() {
+        var tel = document.querySelector('#tel').value;
+        // console.log(tel)
+        $.ajax({
+            type: 'post',
+            data: {
+                appId: 10010,
+                phone: tel
+            },
+            url: requestUrl + '/api/ucs/login/phone_verify',
+            success: function (res) {
+
+                if (res.code == 0) {
+
+                    setTime(btn);
+                    countDown--;
+                    return;
+                }
+                if (!(res.code >= 2000 && res.code < 4000)) {
+
+                    mui.toast(res.msg);
+                }
+
+            }
+        })
+    }
+    // 时间
+    function setTime(val) {
+        if (time == 0) {
+            val.removeAttribute("disabled");
+            val.value = "获取验证码";
+            time = origTime;
+            return;
+        } else {
+            val.setAttribute("disabled", true);
+            val.value = "重新发送(" + time + ")";
+            time--;
+        }
+        ctime = setTimeout(function () {
+            setTime(val)
+        }, 1000)
+    };
+    // 显示图形验证码
+    function showVerifyCode() {
+        $('html,body').css('height', '100%').css('overflow-y', 'hidden');
+        var bg = document.getElementById('k_alertBg');
+        bg.classList.remove('shouldHidden')
+        if (!verifyCodeModule) verifyCodeModule = new GVerify("k_alertCode");
+        verifyCodeModule.refresh();
+        document.getElementById("k_verfyDoneBtn").onclick = function () {
+            var res = verifyCodeModule.validate(document.getElementById("k_code_input").value);
+            if (res) {
+                countDown = 1;
+                $('html,body').css('height', '100%').css('overflow-y', 'visible');
+                bg.classList.add('shouldHidden')
+                var sendBtn = document.getElementById('btn');
+                sendCodeAction(sendBtn);
+            } else {
+                alert("验证码错误");
+            }
+        }
+    }
+</script>
+
+</html>

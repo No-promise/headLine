@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <link href="../css/prenticeProfile.css" rel="stylesheet" />
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/common.css">
+    
+    
+    <title>徒弟</title>
+</head>
+
+<body style="line-height: normal">
+
+    <div class="p_wrapper" id="k_wrapper">
+        <div class="header" id="k_header">
+
+            <div class="headerBG">
+                <img class="headerRightIcon" src="../icon/welfare_apprentices_gold_bg@2x.png" />
+                <div class="coin">
+                    <p class="jiahao">+
+                        <span class="count">0</span>
+                    </p>
+                    <p class="additional"> 今日徒弟贡献金币 </p>
+                </div>
+            </div>
+            <div class="headFooter">
+                <div class="todayGrow footer">
+                    <p class="jiahao">+
+                        <span class="count">0</span>
+                    </p>
+                    <p class="additional">今日徒弟(人)</p>
+                </div>
+                <div class="sumGrow footer">
+                    <p class="count">0</p>
+                    <p class="additional">累计徒弟(人)</p>
+                </div>
+                <div class="sumCoin footer">
+                    <p class="count">0</p>
+                    <p class="additional">累计贡献(金币)</p>
+                </div>
+            </div>
+
+            <div class="footerLine" id="k_footerLine"></div>
+        </div>
+        <div class="container" id="k_container">
+            <div class="mui-content" id="k_mui-content">
+                <div id="slider" class="mui-slider">
+                    <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                        <div class="mui-control-item mui-active" onclick="clickSegmentAction(this.id,true)" id="leftSegment">
+                            全部徒弟
+                        </div>
+                        <div class="mui-control-item" onclick="clickSegmentAction(this.id,true)" id="rightSegment">
+                            贡献榜
+                        </div>
+                    </div>
+                    <div id="sliderProgressBar1" class="mui-slider-progress-bar1 mui-col-xs-11">
+                        <div id="sliderLine" class="sliderLine">
+                        </div>
+                    </div>
+                    <div class="mui-slider-group" style="transform: none" id="k_mui-slider-group">
+                        <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                            <div id="scroll1" class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <ul class="mui-table-view" id="itemTableView1">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="item2mobile" class="mui-slider-item mui-control-content">
+                            <div id="scroll2" class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <ul class="mui-table-view" id="itemTableView2">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<span style="display:none">
+    <script src="https://s13.cnzz.com/z_stat.php?id=1273878911&web_id=1273878911" language="JavaScript"></script>
+</span>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/JanesiBridges.js"></script>
+<script>
+//获取某参数的对应参数值
+    var action = getRequest()['action'] 
+
+    function clickSegmentAction(segmentId, animation) {
+
+        var leftSegment = document.getElementById("leftSegment");
+        var rightSegment = document.getElementById("rightSegment");
+        var sliderLine = document.getElementById('sliderLine');
+
+        var item1mobile = document.getElementById("item1mobile");
+        var item2mobile = document.getElementById("item2mobile");
+        if (segmentId == 'leftSegment') {
+
+            item2mobile.style.display = 'none';
+            item1mobile.style.display = 'inline';
+            if (!leftSegment.className.match('mui-active')) {
+
+                leftSegment.classList.add('mui-active');
+            }
+            rightSegment.classList.remove('mui-active');
+
+            if (animation) {
+                sliderLine.style.animation = '';
+                sliderLine.style.animation = 'moveLeft 0.4s ease 1';
+                sliderLine.style.animationFillMode = 'both';
+            } else {
+
+                sliderLine.style.animation = '';
+                sliderLine.style.left = '22%';
+            }
+            fetchData(0, false);
+        } else {
+
+            item2mobile.style.display = 'inline';
+            item1mobile.style.display = 'none';
+            if (!rightSegment.className.match('mui-active')) {
+
+                rightSegment.classList.add('mui-active');
+            }
+            leftSegment.classList.remove('mui-active');
+
+            if (animation) {
+                sliderLine.style.animation = '';
+                sliderLine.style.animation = 'moveRight 0.4s ease 1';
+                sliderLine.style.animationFillMode = 'both';
+            } else {
+
+                sliderLine.style.animation = '';
+                sliderLine.style.left = '73%';
+            }
+            fetchData(1, false);
+        }
+    }
+
+
+
+
+
+    // 获取参数
+    function getRequest() {
+        var urls = location.href; //获取整个地址栏地址
+        var theRequest = new Object();
+        if (urls.indexOf("?") != -1) {
+            var str = urls.split('?')[1]; //截取？之后的所有参数
+            str = str.split("&"); //将每个参数截取放置到数组
+            for (var i = 0; i < str.length; i++) {
+                theRequest[str[i].split("=")[0]] = unescape(str[i].split("=")[1]); //将属性及属性值分别归属到数组
+            }
+        }
+        return theRequest;
+    }
+    // 跳转链接
+    var str = location.href.split('?')[1];
+
+    window.onload = function () {
+        // 全局定义请求地址
+        window.JanesiApi.reqUrl = requestUrl;
+        getSummary();
+       setTimeout(function() {
+           clickSegmentAction('leftSegment');
+       }, 500);
+        
+        
+    }
+   
+
+
+    
+    function getSummary() {
+        // 获取邀请码
+        var reqApi = '/app/interest/invite/summary';
+        window.JanesiApi.sendApi(reqApi, 'post', reqParams, function (res) {
+            if (res.code == 0) {
+
+                var cont = [];
+                cont = document.querySelectorAll('.count')
+                cont[0].innerHTML = res.result.dayContribution;
+                cont[1].innerHTML = res.result.dayInvite;
+                cont[2].innerHTML = res.result.inviteCount;
+                cont[3].innerHTML = res.result.contribution;
+            }
+        })
+    }
+
+
+    function fetchData(index, isLoadMore) {
+            var ulContainer = document.querySelector(index == 0 ? "#itemTableView1" : "#itemTableView2");
+            var list = ulContainer.getElementsByTagName('li');
+            var reqApi = index == 0 ? ('/app/interest/invite/apprentice_list') : (
+                '/app/interest/apprentice/contribution_list');
+            if (list.length > 0) return;
+
+            window.JanesiApi.sendApi(reqApi, 'post', reqParams, function (res) {
+                    if (res.result && res.result.length <= 0) {
+
+                        if (isLoadMore) return;
+                        if (index == 0) {
+
+                            ulContainer.innerHTML = '<div class = "empty" id = "k_empty1">' +
+                                '<div class = "emptyBG">' + '</div>' +
+                                '<div class = "emptyTopString">' + '50%以上的用户在看点头条靠徒儿进贡' + '</div>' +
+                                '<p class = "emptyLeftString">' + '躺着赚零花钱，' +
+                                '<span class ="emptyRigString" onclick="getStudent(this)">' + '立即去收徒>>' +
+                                '</span>' + '</p>'
+                            '</div>';
+                        } else {
+
+                            ulContainer.innerHTML = '<div class = "empty" id = "k_empty2">' +
+                                '<div class = "emptyBG ranking">' + '</div>' +
+                                '<div class = "emptyTopString">' + '50%以上的用户在看点头条靠徒儿进贡' + '</div>' +
+                                '<p class = "emptyLeftString">' + '躺着赚零花钱，' +
+                                '<span class ="emptyRigString" onclick="getStudent1(this)">' + '立即去收徒>>' +
+                                '</span>' + '</p>'
+                            '</div>';
+                        }
+                        var k_empty = document.getElementById(index == 0 ? "k_empty1" : "k_empty2");
+                        var k_mui_slider_group = document.getElementById("k_mui-slider-group");
+                        // var vaHeight = k_mui_slider_group.offsetHeight + 'px';
+                        var vaHeight = 220 + 'px';
+                        k_empty.style.height = vaHeight;
+                    } else {
+                        var array = res.result;
+                        console.log(res);
+                        for (var i = 0; i < array.length; i++) {
+                            var model = array[i];
+                            var li = document.createElement('li');
+                            var url = model.avator ? model.avator :
+                                'http://yun.janesi.net/web-test/zhiqu-web/img/userPhoto.jpg';
+                            if (index == 0) {
+
+                                li.innerHTML =
+                                    `<div class="row">
+                                        <img class = "avatar" src="${url}"/>
+                                        <div class="nameMobile">
+                                            <p class = "name">${model.nickName}</p>
+                                            <p class = "mobile">${model.phone}</p>
+                                        </div>
+                                        <div class="sumGrow">
+                                            <div class = "sumCount">
+                                                <img class = "icon" src = "../icon/coinIcon@2x.png" />
+                                                <p class = "jiahao">+<span class = "count">${model.dayContribution}</span></p>
+                                            </div>
+                                            <p class = "addition">今日贡献</p>
+                                        </div>
+                                            <div class = "line" />
+                                    </div>
+                                    `
+                            } else {
+
+                                li.innerHTML =
+                                    `
+                                <div class="row">
+                                    <div class = order isRanking>${(i + 1)}</div>
+                                    <img class = "avatar isRanking" src="${url}"/>
+                                    <div class="nameMobile">
+                                        <p class = "name">${model.nickName}</p>
+                                        <p class = "mobile">${model.phone}</p>
+                                    </div>
+                                    <div class="sumGrow">
+                                        <div class = "sumCount">
+                                            <img class = "icon" src = "../icon/coinIcon@2x.png" />
+                                            <p class = "jiahao">+<span class = "count">${model.contribution}</span></p>
+                                        </div>
+                                        <p class = "addition">累计贡献</p>  
+                                    </div>
+                                    <div class = "line" />
+                                </div>
+                                `
+                            }
+                            ulContainer.appendChild(li);
+                        }
+                        var innerString = ulContainer.innerHTML;
+                        
+                        ulContainer.innerHTML = '';
+                        ulContainer.innerHTML = innerString;
+                        var k_mui_slider_group = document.getElementById("k_mui-slider-group");
+                        var tempH = ulContainer.offsetHeight;
+                        var kgroup_tempH = k_mui_slider_group.offsetHeight;
+                        tempH = tempH + 'px';
+                        ulContainer.style.height = tempH;
+                        
+
+                    }
+
+                })
+
+
+        }
+
+    // 跳师徒界面
+    var teacherLink = {
+        'url': urlBase+'/janesi-headline/ZQFL/templete/teacherAndPupil.html'
+    }
+
+    console.log(teacherLink)
+
+    function getStudent() {
+        window.JanesiBridge.callNative('open', teacherLink);
+    }
+
+    function getStudent1() {
+        window.JanesiBridge.callNative('open', teacherLink);
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,86 @@
+body{
+    background-color: #fff;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+/*底部弹框  */
+
+.mui-table-view-cell {
+    padding: 0;
+    border-radius: 0;
+    background-color: #fff;
+}
+
+.mui-popover.mui-popover-action .mui-table-view {
+    margin: 0;
+}
+
+.mui-table-view .top {
+    font-size: 14px;
+    color: #999;
+    margin: 0.5866rem 0 0.613rem 0;
+}
+
+.mui-popover.mui-popover-action .mui-table-view {
+    border-radius: 0;
+}
+
+.mui-table-view-cell>a:not(.mui-btn) .mui-table-view-cell>a:not(.mui-btn) {
+    padding: 0;
+    margin: 0 0 0.8rem 0;
+}
+
+.mui-table-view .bott {
+    font-size: 12px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.8rem;
+    margin-bottom: 0.8rem;
+}
+.weChat{
+    position: relative;
+}
+.weChat #tuijian{
+    position: absolute;
+    top:0;
+    right:-0.4rem;
+    width: 0.91rem;
+    height: 0.51rem;
+}
+.mui-table-view .bott img {
+    width: 1.44rem;
+    height: 1.44rem;
+}
+
+.mui-table-view .mui-table-view-cell span {
+    font-size: 16px;
+    color: #333;
+}
+
+#share .mui-table-view:nth-of-type(2) {
+    width: 10rem;
+    height: 1.386rem;
+    border-radius: 0;
+}
+.mui-table-view .bottom{
+    margin-bottom:0.8rem;
+     display: none; 
+}
+.mui-table-view .bottom p{
+    font-size: 14px;
+    color:#333;
+}
+.mui-table-view .bottom span{
+    color:#4A90E2;
+}
+#friends{
+    display: none;
+}
+#msg{
+    display: none;
+}
+
+  /*  */

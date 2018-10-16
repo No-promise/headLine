@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>联系我们</title>
+    <link rel="stylesheet" href="../css/mui.min.css">
+</head>
+<style>
+    html,body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #F6FCFF ;
+    }
+    .link_top{
+        width: 10rem;
+        height: 3.36rem;
+         overflow: hidden;
+    }
+    .link_top img{
+        width: 10rem;
+    }
+    .link_mian{
+        width: 8.9rem;
+        margin:0 0.55rem;
+        background-color: #fff;
+        z-index: 222;
+        padding: 0 0.53rem; 
+        box-sizing: border-box;
+         padding-top:0.1rem; 
+    }
+    .link_mian p{
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: #666666;
+        letter-spacing: 0;
+    }
+    #link_title{
+        font-family: PingFangSC-Medium;
+        font-size: 16px;
+        color: #333333;
+        letter-spacing: 0;
+        margin:0.65rem 0 0.4rem 0;
+    }
+    .copyText{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .copy{
+        width: 1.22rem;
+        height: 0.48rem;
+        font-family: PingFangSC-Regular;
+        font-size: 12px;
+        color: #4A90E2;
+        letter-spacing: -0.32px;
+        text-align: center;
+        border:1px solid #4A90E2;
+        border-radius: 0.58rem;
+        line-height: 0.45rem;
+
+    }
+    .line{
+        width: 7.65rem;
+        height: 2px;
+        border-top:1px solid #ddd;
+        margin-top:0.63rem;
+    }
+    .link_black{
+        width: 100%;
+        height: 2rem;
+    }
+</style>
+<body>
+    <div class="link_top">
+        <img src="../icon/mine_cooperate.png" alt="">
+    </div>
+    <div class="link_mian">
+        <p id="link_title">联系客服：</p>
+        <p>QQ:<span>17457698</span></p>
+        <p>微信：<span>kandian2018</span></p>
+        <div class="copyText">
+            <p>用户QQ群：<span id="qqText">633022568</span></p>
+            <div class="copy" onclick="copyText()">
+                复制
+            </div>
+        </div>
+        <div class="line"></div>
+
+        <p id="link_title">广告合作：</p>
+        <p>微信:<span>540717843</span></p>
+        <p>QQ：<span>540717843</span></p>
+        <p>邮箱：<span>wbz@janesi.com</span></p>
+        <div class="line"></div>
+
+        <p id="link_title">商务合作：</p>
+        <p>邮箱:<span>lxy@janesi.com</span></p>
+        <div class="link_black">
+
+        </div>
+        
+    </div>
+</body>
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/mui.js"></script>
+<script>
+    function copyText(){
+        var qqText = document.querySelector('#qqText');
+        var text1 = qqText.innerHTML;
+        if (text1.length < 1) return;
+        var oInput = document.createElement('input');
+        oInput.value = text1;
+        oInput.setAttribute('readOnly', 'readOnly');
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        oInput.setSelectionRange(0, oInput.value.length);
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display = 'none';
+        var mut = mui.toast('复制成功', {
+            duration: 'short',
+            type: 'div'
+        });
+        console.log(mut);
+    }
+    
+</script>
+</html>

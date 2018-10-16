@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>公告</title>
+    <style>
+    html,body{
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+    }
+    .content{
+        padding: 0 0.4rem;
+    }
+    .listContent{
+        margin:0.59rem 0  0.43rem 0;
+        font-family: PingFangSC-Regular;
+        font-size: 0.43rem;
+        color: #333333;
+        letter-spacing: 0;
+        line-height: 0.5rem;
+        word-break:break-all; 
+        position: relative;
+        white-space:normal
+    }
+    hr{
+         width: 9.2rem;
+        border:0.5px solid #eee;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <ul id="list">
+            
+        </ul>
+    </div>
+</body>
+
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/JanesiBridges.js"></script> 
+<script>
+    window.onload = function () {
+        // 全局定义请求地址
+        window.JanesiApi.reqUrl = requestUrl;
+
+        // 获取邀请码
+        var reqApi = '/app/interest/notice/notice';
+        window.JanesiApi.sendApi(reqApi, 'post', {
+            // 'appId': appId,
+            'typeCode': 0
+
+        }, function (res) {
+
+            var result = res.result;
+
+            for (var i = 0; i < result.length; i++) {
+                console.log(result[i]);
+                var li = document.createElement('li');
+                li.innerHTML = `
+                    <div class="listContent">${result[i]}</div>
+                    <hr/>
+                `
+                document.getElementById('list').appendChild(li);
+            }
+
+        })
+    }
+    
+</script>
+</html>

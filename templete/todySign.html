@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>每日签到领红包</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!-- <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script> -->
+		<script src="../js/flexible.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		<link rel="stylesheet" href="../css/sign.css" />
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/JanesiBridges.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/countUp.js"></script>
+	    <!-- <script src="../js/vconsole.min.js"></script>
+        <script>
+            var vConsole = new VConsole();
+            // vConsole.show();
+        </script> -->
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="signDetail">
+				<div class="signRecord" @click="showRecord()">
+					<img src="../img/icon_signed_record.png" alt="" />
+					<span>签到记录</span>
+				</div>
+				<div class="signRule" @click="showRule()">
+					<img src="../img/icon_signed_rule@2x.png" alt="" />
+					<span>签到规则</span>
+				</div>
+			</div>
+
+			<div class="signWealth">
+				<div class="signWealthInner">
+					<div class="signGoShareTit" v-if="signState=='0'">
+						每日签到领红包
+					</div>
+					<div class="signIntro" v-else>
+						<div class="signDays">
+							连续签到第<span>{{totalDay}}</span>天
+						</div>
+						<div class="signCoin">
+							<span>{{totalCoin}}</span><span>金币</span>
+							<div class="realize" @click="goGetCoin()">
+								去兑现 >
+							</div>
+						</div>
+					</div>
+
+					<!--分享按钮-->
+					<div class="signGoShare" v-if="signState=='0'" @click="newsFirstGetCoinBtn()">
+						分享后领签到红包
+					</div>
+					<div class="signShare" v-else-if="signState=='1'" @click="shareGetSecondBtn()">
+						分享拆第2份红包奖励
+					</div>
+					<div class="signShare" v-else-if="signState=='2'" @click="shareGetMoreBtn()">
+						分享再拆一份红包奖励
+					</div>
+					<div class="signFinish" v-else-if="signState=='3'">
+						今日已签到，明日还可以领红包
+					</div>
+
+					<div class="userWealth" v-show="wealthShow">
+						<img :src="wealthImg" alt="" />
+						<span v-html="wealthTxt">
+							<span>3秒前</span>兑换<span>1000</span>金币
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="signBottom" @click="showCoin()">
+				<div class="line">
+					<i class="changeLine" :style="{width:changeWidth}"></i>
+					<div class="circle" :class="{signed:isSign>='1'}"></div>
+					<div class="circle" :class="{signed:isSign>='2'}"></div>
+					<div class="circle" :class="{signed:isSign>='3'}"></div>
+					<div class="circle" :class="{signed:isSign>='4'}"></div>
+					<div class="circle" :class="{signed:isSign>='5'}"></div>
+					<div class="circle" :class="{signed:isSign>='6'}"></div>
+					<div class="circle"></div>
+					<i class="gift" :class="{sevenGift:isSeven}"></i>
+				</div>
+			</div>
+			<div class="placeHolder"></div>
+
+			<div class="task">
+				<div class="coinTask" @click="doCoinTask()">
+					<div class="taskIntro">
+						<img src="../img/welfare_signed_more@2x.png" alt="" />
+						<span>金币任务</span>
+					</div>
+					<div class="taskRow">
+						<img src="../img/welfare_signed_jiantou@2x.png" alt="" />
+					</div>
+				</div>
+			</div>
+			<!--签到获取奖励弹框-->
+			<div class="fullMask" v-show="getCoinShow" @click.self="showCoin()">
+				<div class="getCoinTip">
+					<div class="close" @click="showCoin()">
+						<img src="../img/icon_home_all_close@2x.png" alt="" />
+					</div>
+					<div class="tipTit">连续签到<span>7</span>天</div>
+					<div class="tipTit">即可获得神秘礼包</div>
+					<div class="tipImg">
+						<img src="../img/icon_welfare_signed_7days@2x.png" alt="" />
+						<div class="top">最高</div>
+						<div class="coin"><span>888</span>金币</div>
+					</div>
+					<div class="tipBtn" @click="showCoin()">知道了</div>
+				</div>
+			</div>
+			<!--签到规则弹框-->
+			<div class="fullRuleMask" v-show="getRuleShow" @click.self="showRule()">
+
+				<div class="rule">
+					<div class="close" @click="showRule()">
+						<img src="../img/icon_home_all_close@2x.png" alt="" />
+					</div>
+					<div class="ruleTit">
+						<img src="../img/icon_signed_rule_tit@2x.png" alt="" />
+					</div>
+					<div class="ulScroll">
+						<ul class="ruleList">
+							<li> 每天签到都可以领取红包</li>
+							<li> 获得红包后，需分享给好友请好友帮忙拆开，奖励才可到账</li>
+							<li> 领取成功后，每个用户还有再次分享给好友领红包的机会，所以大家及时分享哦</li>
+							<li> 每天分享的机会不同，请大家每天及时签到及时分享，以免损失收益</li>
+							<li> 达到一定数量的金币，可以进行兑换，兑换后才可以到账并提现</li>
+							<li> 连续签到7天更有现金红包奖励</li>
+							<li> 如发现任何作弊行为，看点头条有权取消用户已获得的奖励</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			<div class="fullRecordMask" v-show="getRecordShow" @click.self="closeRecord()">
+				<div class="record">
+					<div class="close" @click="closeRecord()">
+						<img src="../img/icon_home_all_close@2x.png" alt="" />
+					</div>
+					<div class="recordTit">
+						<img src="../img/icon_signed_record_tit.png" alt="" />
+					</div>
+					<div class="ulScroll2">
+						<ul class="recordList">
+							
+						</ul>
+					</div>
+					<div class="noMoreData" v-show="noMoreShow">暂无更多数据</div>
+				</div>
+			</div>
+			<!--****************  -->
+			<!--分享后 领金币弹框 -->
+			<div class="signFirst_mask fullScreen" v-show="signFirst_mask" @click.self="closeCancel()">
+				<img class="closeCancel" src="../icon/sign/icon_home_all_close@2x.png" @click="closeCancel()">
+				<div class="first_content">
+					<img src="../icon/sign/icon_signed_hongbao_bg.png" >
+					<p>恭喜你获得金币红包</p>
+					<p>连续签到<span class="singDays">{{backGet.signDays}}</span>天</p>
+					<p>+<span class="newsFirstCoin">{{backGet.coins}}</span>金币</p>
+					<div class="newsFirstGetCoinBtn" @click="newsFirstGetCoinBtn()">
+						分享后立即领取
+					</div>
+				</div>
+			</div>
+			<!--拆第二份、再拆一份、去阅读 弹框 -->
+			<div class="newShareFirst fullScreen" v-show="newShareFirst" @click.self="closeCancel()">
+				<img class="closeCancel" src="../icon/sign/icon_home_all_close@2x.png" @click="closeCancel()">
+				<div class="shareFirst_content">
+					<img src="../icon/sign/icon_signed_open_hongbao_bg2.png" >
+					<div class="share_bg">
+						<div class="share_bg_content"></div>
+						<p>恭喜你，成功领取</p>
+						<p><span class="plus">+</span>
+							<span class="additionNums" id="box">{{othersGet.coins}}</span> 金币
+						</p>
+						<div class="shareSecond" @click="shareSecond()" :class="{btnColor:isChange}">
+							{{othersGet.btnType}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--分享 按钮  -->
+			<div class="shareButton fullScreen" v-show="shareButton"  @click.self="closeCancel()">
+				<!--第一次分享 按钮  -->
+				<div class="firstShareTip" v-show="firstShareTip">
+					<div class="shareText">
+						<p>分享到{{shareText.come}}后</p>
+						<p>返回看点头条领取红包</p>
+					</div>
+					<div class="shareIcon">
+						<p>分享到</p>
+						<img :src="shareText.imgSrc" @click="firstGoOuter()">
+						<p>{{shareText.come}}</p>
+					</div>
+				</div>
+				<!--再次分享  -->
+				<div class="nextShareTip" v-show="nextShareTip">
+					<div class="nextShareText">
+						<p>再次分享到{{nextShareText.come}}</p>
+						<p>返回即可再拆一份红包</p>
+					</div>
+					<div class="nextShareIcon">
+						<p>分享到</p>
+						<img :src="nextShareText.imgSrc" @click="nextGoOuter()">
+						<p>{{nextShareText.come}}</p>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</body>
+<script>
+var vm = new Vue({
+	el: '#app',
+	data: {
+		getCoinShow: false, //金币弹框
+		getRuleShow: false, //规则弹框
+		getRecordShow: false, //记录弹框
+		noMoreShow: false, //暂无更多数据
+		signState: '0', //签到状态按钮（0:未签到 1:拆第2份 2:再拆一份 3:签到已完成）
+		wealthImg: '', //兑换用户的头像
+		isSeven: false, //第七天宝箱的状态
+		changeWidth: 0, //签到进度条的长度
+		isSign: '', //签到进度条圆圈的状态
+		totalDay: '1', //连续签到的时间
+        totalCoin: '1', //领取的金币数
+        signList: [],
+		pageNo: '1',
+		pageSize: '10',
+        wealth: [],
+        wealthTxt: '',
+        i: '0',
+        wealthShow:false,
+		signFirst_mask: false,//未签到 分享领取金币的红包
+		newShareFirst: false,//三种弹框合并
+		// 分享按钮页 
+		shareButton: false,
+		firstShareTip: false, //第一次分享
+		nextShareTip: false, // 再次分享
+		shareText: { //第一次分享来源
+			come: '微信群',
+			imgSrc: ''
+		},
+		nextShareText: {//第二次分享来源
+			come: '微信群',
+			imgSrc: ''
+		},
+		// 弹框内容
+		backGet: { //分享后领取
+			signDays: '',
+			coins: ''
+		},
+		othersGet: {
+			coins: '',
+			preCoins:'',
+			shareCoins: '',
+			btnType: ''
+		},
+		isChange:false,
+	},
+	created() {
+			this.signOrNot();
+			this.getUserList();
+	},
+	mounted() {
+		// 全局声明服务地址
+		window.JanesiApi.reqUrl = requestUrl
+		let that = this
+		console.log(window.JanesiApi.reqUrl)
+	},
+	methods: {
+        time() {
+			let that = this;
+			var timer = setInterval(function () {
+				var ulScroll2 = document.querySelector('.ulScroll2');
+				var recordList = document.querySelector('.recordList');
+				if (ulScroll2) {
+					if (ulScroll2.scrollTop + ulScroll2.offsetHeight == recordList.offsetHeight) {
+						console.log('ok')
+						clearInterval(timer)
+						that.getRecordList();
+					}
+				} else {
+					clearInterval(timer)
+				}
+			}, 1000)
+		},
+
+		//签到获取金币的弹框
+		showCoin(e) {
+			this.getCoinShow = !this.getCoinShow
+		},
+		//签到记录的弹窗
+		showRecord() {
+            this.getRecordShow = !this.getRecordShow
+            this.pageNo = '1';
+			this.getRecordList();
+        },
+        closeRecord(){
+            this.getRecordShow = !this.getRecordShow
+            document.querySelector('.recordList').innerHTML='';  
+        },
+		//签到规则的弹窗
+		showRule() {
+			this.getRuleShow = !this.getRuleShow
+		},
+		//通知原生去跳转钱包页面
+		goGetCoin() {
+			window.JanesiBridge.callNative('open', {
+				'page': 'app_money'
+			})
+		},
+		//通知原生去跳转福利页面
+		doCoinTask() {
+			window.JanesiBridge.callNative('open',{
+				'page': 'fuli_page'
+            })
+		},
+		//判断是否签到
+		signOrNot() {
+			// window.JanesiApi.reqUrl = requestUrl
+			//如果已经签到就不弹红包弹框 只跳转该页面 ，如果未签到就跳转该页面时并弹红包弹框
+			//如果已经签到但是未完成分享的任务，则无需再弹弹框
+			let that = this;
+			var signApi = '/api/ucs/sign/user_sign';
+			window.JanesiApi.sendApi(signApi, 'post', {
+				userId: '546300'
+			}, function (res) {
+                console.log(res)
+				that.signLine(res);//进度条的渲染
+				let e = res.result
+				if (e.isSign == '0') { //未签到 直接弹分享领取金币的红包
+					that.backGet = e
+                    console.log(that.backGet)
+                    that.signFirst_mask = true
+					that.signState = '0'
+                } else if (e.isSign == '1') { //已签到 但是判断签到分享任务是否完成
+                    that.totalDay = e.signDays
+					that.totalCoin = e.coins
+					if (e.isComplete == '0') { //已签到但是未完成签到里面的分享任务
+						if (e.isAlert == '1') { //任务未完成 弹出分享拆第二份红包的弹框
+							that.newShareFirst = true
+							that.othersGet = e
+							if (e.shareType == 1) { //分享后拆第二份红包类型
+                                that.othersGet.btnType = '分享后拆第2份红包'
+								that.signState = '1'
+							} else {
+                                that.othersGet.btnType = '分享再拆一份红包奖励'
+								that.signState = '2'
+							}
+							console.log(that.othersGet.btnType)
+						} else { //任务未完成 也无需弹弹框  直接展示当前页面
+							//that.signState = '1' //未完成第一次分享的任务
+							// that.totalDay = e.signDays
+                            // that.totalCoin = e.coins
+                            if(e.shareType == 1){//任务未完成 当前页面按钮的显示
+                                that.signState = '1'
+                            }else if(e.shareType == 2){
+                                that.signState = '2'
+                            }
+						}
+					} else { //已签到并且完成签到里面的分享任务，不弹窗，只是进入当前页面
+						that.signState = '3'
+						// that.totalDay = e.signDays
+						// that.totalCoin = e.coins
+					}
+				}
+			})
+		},
+		
+		//签到进度圆圈和线的状态变化
+		//10 26 42 58 74 90 100
+		signLine(res) {
+            if(res.result.signDays){
+                this.changeWidth = (res.result.signDays - 1) * 16 + 10 + '%'
+			    this.isSign = res.result.signDays
+			    if (res.result.signDays == '7') {
+				    this.isSeven = true;
+			    }
+            }
+		},
+		
+		//获取签到记录（弹框）
+		getRecordList() {
+			// window.JanesiApi.reqUrl = requestUrl
+			let that = this;
+			var reqApi = '/api/ucs/sign/sign_flow';
+			window.JanesiApi.sendApi(reqApi, 'post', {
+				// 'userId': '1478',
+				'pageNo': that.pageNo,
+				'pageSize': that.pageSize
+			}, function (res) {
+				console.log(res)
+				if (res.code == 0 && res.result.length != 0) {
+					console.log(res.result)
+					var ul = document.querySelector('.recordList');
+					console.log(ul)
+					for (var i = 0; i < res.result.length; i++) {
+						var li = document.createElement('li');
+						li.innerHTML = `
+							<div class="leftTit">
+								<span>${res.result[i].detail}</span>
+								<span>${res.result[i].gmtCreate}</span>
+							</div>
+							<div class="rightTit">+${res.result[i].incrCoin}金币</div>
+						`
+						ul.appendChild(li)
+						}
+					if (res.result.length <= 3) {
+						that.noMoreShow = true
+					} else {
+						that.noMoreShow = false
+					}
+					that.pageNo = String(parseInt(that.pageNo) + 1);
+					that.time();
+				}
+			})
+		},
+
+		//获取用户兑换金币的数据，并且动态以动画的形式的输出（走马灯）
+		getUserList() {
+			let that = this;
+			let reqApi = '/app/interest/coin/coin_record';
+			window.JanesiApi.sendApi(reqApi, 'post', {
+				'detail': '金币兑换',
+			}, function(res) {
+				console.log(res)
+				if(res.result.length!=='0'){
+					that.wealthShow=true;
+					that.wealth = res.result;
+				that.changeUser(that.i, that.wealth)
+					setInterval(function () {
+						that.changeUser(that.i, that.wealth)
+					}, 2000)
+				}
+				
+
+			})
+		},
+		changeUser(i, userArry) {
+			this.i = this.i == userArry.length - 1 ? 0 : parseInt(i) + 1;
+			if (userArry[i].avator != null) {
+				this.wealthImg = userArry[i].avator;
+			} else {
+				this.wealthImg = '../img/userPhoto.png';
+			}
+			this.wealthTxt = userArry[i].dateFormate + '&nbsp领到' + '</br>' + userArry[i].incrCoin + '金币';
+		},
+		// 分享后 领金币 弹框按钮
+        newsFirstGetCoinBtn() {
+            let that = this
+            that.signFirst_mask = false
+            that.shareButton = true  //分享引导页
+            that.firstShareTip = true  //第一次分享引导页
+            that.randomShow()
+        },
+		// 拆第二 再拆 完  三种弹框   按钮
+        shareSecond() {
+            let that = this
+            let type = that.othersGet.btnType
+            console.log(that.othersGet)
+            if(type=='分享后拆第2份红包'){
+                that.newShareFirst = false //拆第二 再拆 完  三种弹框
+                that.shareButton = true  //分享引导页
+				that.firstShareTip = true //第一次分享引导页
+				that.nextShareTip = false
+                that.randomShow()
+            }else if(type=='分享再拆一份红包奖励'){
+                console.log(this)
+                that.newShareFirst = false //拆第二 再拆 完  三种弹框
+				that.shareButton = true  //分享引导页
+				that.firstShareTip = false
+                that.nextShareTip = true //第二次分享引导页
+                that.randomShow()
+            }else if(type=='去阅读，赚金币'){
+				window.JanesiBridge.callNative('open', {
+					'page': 'homePage'
+				})
+            }
+        },
+        shareGetSecondBtn(){
+            let that=this;
+            that.newShareFirst = false //拆第二 再拆 完  三种弹框
+            that.shareButton = true  //分享引导页
+            that.firstShareTip = true //第一次分享引导页
+			that.nextShareTip = false
+            that.randomShow()
+        },
+        shareGetMoreBtn(){
+            let that=this;            
+            that.newShareFirst = false //拆第二 再拆 完  三种弹框
+            that.shareButton = true  //分享引导页
+			that.firstShareTip = false
+            that.nextShareTip = true //第二次分享引导页
+            that.randomShow()
+        },
+
+
+
+
+
+        // 随机出现 微信 朋友圈
+        randomShow(){
+            let that = this
+            let= rand = Math.random();
+            console.log(rand);
+            if (rand >= 0.5) {
+                that.shareText.come = "微信群"
+                that.shareText.imgSrc = '../icon/sign/home_share_weixin@2x.png'
+                // 再次分享内容
+                that.nextShareText.come = "微信群"
+                that.nextShareText.imgSrc = '../icon/sign/home_share_weixin@2x.png'
+            }
+            else {
+                that.shareText.come = "朋友圈"
+                that.shareText.imgSrc = '../icon/sign/home_share_pengyouquan@2x.png'
+                // 再次分享内容
+                that.nextShareText.come = "朋友圈"
+                that.nextShareText.imgSrc = '../icon/sign/home_share_pengyouquan@2x.png'
+            }
+        },
+        // 第一次分享微信 或朋友圈 调原生
+        firstGoOuter() {
+            let that = this
+            console.log(that.shareText);
+            let comer = that.shareText.come;
+            if (comer == "微信群") {
+                window.JanesiBridge.callNativeWithCallBack('openThirdPartShare', {
+					'pathWay': 'wechatSession',
+					'shareType':'sign_share'
+                },function (res){
+                console.log(res)
+				that.shareButton = false
+					if (res.state == '1') {
+                        that.successShare()
+					}
+				})
+            } else {
+                console.log("朋友圈 ");
+                window.JanesiBridge.callNativeWithCallBack('openThirdPartShare', {
+					'pathWay': 'wechatTimeLine',
+					'shareType':'sign_share'
+                },function (res){
+					console.log(res)
+					that.shareButton = false
+					
+					if (res.state == '1') {
+						that.successShare()
+					}
+				})
+            }
+        },
+        // 再次分享
+        nextGoOuter(){
+            let that = this
+            let comer = that.nextShareText.come;
+            if (comer == "微信群") {
+               window.JanesiBridge.callNativeWithCallBack('openThirdPartShare', {
+					'pathWay': 'wechatSession',
+					'shareType':'sign_share'
+                },function (res){
+					console.log(res)
+					that.shareButton = false
+					if (res.state == '1') {
+						that.successShare();
+					}
+				})
+            } else {
+                console.log("朋友圈 ")
+                window.JanesiBridge.callNativeWithCallBack('openThirdPartShare', {
+					'pathWay': 'wechatTimeLine',
+					'shareType':'sign_share'
+                },function (res){
+					console.log(res)
+					that.shareButton = false
+					if (res.state == '1') {
+						that.successShare();
+					}
+				})
+            }
+        },
+        // 分享成功回调
+        successShare() {
+			// window.JanesiApi.reqUrl = requestUrl
+            let that = this
+            window.JanesiApi.sendApi('/api/ucs/sign/sign_share', 'post', {
+                // userId: userId
+            }, function (res,result) {
+				console.log('res/result',res)
+				console.log('res/result',result)
+				result = result.replace('"coins"','"$fb_coins"')
+				var result=JSON.parse(result);
+				let e = res.result
+				that.totalDay = e.signDays
+				that.totalCoin = e.coins
+                if (e.isComplete == 0) { //未完成
+                    that.othersGet = e
+                    that.othersGet.btnType = '分享再拆一份红包奖励' //分享后拆第二份红包类型
+                    that.newShareFirst = true
+					that.signState = '2'
+					that.othersGet.coins = e.preCoins
+					setTimeout(() => {
+						that.runNum(e.preCoins, result.result.$fb_coins)
+						that.othersGet.coins = result.result.$fb_coins
+					}, 1000)
+                } else {
+					that.othersGet = e
+					that.isChange=true
+                    that.othersGet.btnType = '去阅读，赚金币' //完成任务  无分享
+                    that.newShareFirst = true
+					that.signState = '3'
+					that.othersGet.coins = e.preCoins
+					setTimeout(() => {
+						that.runNum(e.preCoins, result.result.$fb_coins)
+						that.othersGet.coins = result.result.$fb_coins					
+					}, 1000)
+                }
+            })
+		},
+		// 弹框中的×
+		closeCancel(){
+			let that = this
+			that.signFirst_mask = false
+			that.newShareFirst = false
+			that.shareButton = false
+		},
+		// 弹框金币动画
+		runNum(start, end) {
+            var options = {
+                useEasing: true, 
+                useGrouping: true, 
+                separator: ',', 
+                decimal: '.', 
+            }
+            var demo = new CountUp('box', start, end, 0, 1.5, options);
+            if (!demo.error) {
+                demo.start();
+            } else {
+                console.error(demo.error);
+            }
+        }
+		
+
+	}
+})
+</script>
+
+</html>
