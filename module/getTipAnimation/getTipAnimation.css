@@ -1,0 +1,171 @@
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    outline-style: none;
+    /*FF*/
+}
+
+body,html{
+    background-color: #f34d34;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.g_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.g_wrapper .bg {
+    position: relative;
+}
+
+.g_wrapper .redBg {
+    width: 10rem;
+}
+
+@keyframes moveLeft {
+    from {
+        -webkit-transform: rotateY(0deg);
+    }
+    to {
+        -webkit-transform: rotateY(360deg);
+    }
+}
+
+.g_wrapper .openBn {
+    width: 2.88rem;
+    position: absolute;
+    top: 8.13rem;
+    left: 50%;
+    margin-left: -1.44rem;
+    transition: 1s;
+    transform-style: preserve-3d;
+    animation: moveLeft 1s linear infinite;
+}
+
+.g_wrapper .userProfile {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 10rem;
+    top: 2.6rem;
+}
+
+.g_wrapper .userProfile .avator {
+    border-radius: 50%;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-color: #fff;
+}
+
+.g_wrapper .userProfile .string1 {
+    opacity: 0.64;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: -0.33px;
+    text-align: center;
+    margin-bottom: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.g_wrapper .userProfile .string2 {
+    font-family: PingFangSC-Medium;
+    font-size: 18px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.g_wrapper .openString {
+    
+    font-family: PingFangSC-Regular;
+    font-size: 18px;
+    color: #FFFFFF;
+    letter-spacing: -0.37px;
+    text-align: center;
+    position: absolute;
+    top: 11.7rem;
+    left: 0;
+    right: 0;
+}

@@ -18,7 +18,9 @@
      }
      .content{
          padding: 25px 15px 0 15px;
+         /* display: none; */
      }
+    
      .title{
          font-size: 0.32rem; 
          color: #333;
@@ -46,17 +48,36 @@
     </style>
 </head>
 <body>
-    <div class="content">
-        <div class="paragraph">        
-          <p class="title">看点头条是什么？</p>
+    <div class="content" id="k_content">
+   
+    </div>
+</body>
+<script src="http://yun.janesi.net/web-test/zhiqu-web/js/rem.js"></script>
+<script src="http://yun.janesi.net/web-test/zhiqu-web/js/JanesiBridge.js"></script>
+<script>
+
+console.log(window.JanesiBridge);
+var appName = '';
+if(window.JanesiBridge.isiOS){
+
+    appName = '多点趣闻';
+}else{
+
+    appName = '看点头条';
+}
+
+
+
+var templete = `     <div class="paragraph">        
+          <p class="title">${appName}是什么？</p>
           <p class="text">
-          	看点头条致力于打造一款新形式的本地资讯阅读软件，以移动应用APP为载体进行内容创造，资讯阅读，提供更多有用、有趣、有益的内容给用户。
+          	${appName}致力于打造一款新形式的本地资讯阅读软件，以移动应用APP为载体进行内容创造，资讯阅读，提供更多有用、有趣、有益的内容给用户。
           </p>  
         </div> 
         <div class="paragraph">         
           <p class="title">什么是金币？</p>
           <p class="text">
-                        金币是看点头条内的一种虚拟货币，它能在客户端中兑现金，后期还会上线兑换商品，金币可参与抽奖活动。
+                        金币是${appName}内的一种虚拟货币，它能在客户端中兑现金，后期还会上线兑换商品，金币可参与抽奖活动。
           </p>  
         </div> 
         <div class="paragraph">         
@@ -76,8 +97,9 @@
           <p class="text">
              	你可以通过【福利】里面的任务每日领取，高额的金币。
           </p>  
-        </div> 
-    </div>
-</body>
-<script src="http://yun.janesi.net/web-test/zhiqu-web/js/rem.js"></script>
+        </div> `
+
+var content = document.getElementById('k_content');
+content.innerHTML = templete;
+</script>
 </html>

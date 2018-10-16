@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link href="../css/mui.min.css" rel="stylesheet" />
+	<link href="../css/iconfont.css" rel="stylesheet" />
+	<link href="../css/imgView.css" rel="stylesheet" />
+	<link href="../css/new_androidDetail.css" rel="stylesheet" />
+    <title>Document</title>
+    <style>
+    body{
+        /* padding: 0 0.4rem; */
+    }
+    .big_img_ad{
+        width: 100%;
+        
+    }
+    .ad_title_font{
+        font-size: 0.43rem;
+        margin-bottom: 0.16rem;
+    }
+    .big_one{
+        width: 9.2rem;
+        height: 5.12rem; 
+        display: block;
+    }
+    .ad_foot{
+        margin-top:0.16rem;
+    }
+    .ad_tipShow{
+        width: 0.75rem;
+        height: 0.45rem;
+        border:0.5px solid #A5A5A5;
+        border-radius: 0.08rem;
+        font-size: 0.26rem;
+        color:#A5A5A5;
+        line-height: 0.45rem;
+        text-align: center;
+    }
+    .three_main{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .three_img{
+        width: 2.98rem;
+         height: 2.13rem; 
+        display: block;
+    }
+    .left_img_ad{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .ad_right{
+        margin-left: 0.4rem;
+    }
+    .ad_left{
+        position: relative;
+    }
+    .foot_left{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    </style>
+
+</head>
+<body>
+    <ul class="recommend mui-list-unstyled" id="list">
+
+   
+
+	</ul>
+    
+</body>
+<script src="../js/jquery-2.1.1.min.js"></script>
+ <!-- <script src="./getList.js"></script>  -->
+  <script src="../js/mv.js"></script>  
+<script>
+// https://www.easy-mock.com/mock/5b062d23d14ea45a9a8954b0/toutiao/listDetail
+
+    $.ajax({
+        type:'get',
+        url:'https://www.easy-mock.com/mock/5b062d23d14ea45a9a8954b0/toutiao/listDetail',
+        success:function(e){
+            console.log(e)
+            getList(e);
+        }
+    })
+
+
+
+</script>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="http://yun1.janesi.net/web-test/zhiquFuli/css/inviteCodeTip.css" rel="stylesheet" />
+    <script src="http://yun.janesi.net/web-test/zhiqu-web/js/rem.js"></script>
+    <title>绑定邀请码</title>
+</head>
+
+<body>
+
+    <div class="tip_wrapper">
+        <div class="tipBg">
+            <img class="tipImg" src="http://yun1.janesi.net/web-test/zhiquFuli/icon/invite_hongbao_bg1.png">
+        </div>
+        <div class="numContent">
+            <div class="string1">
+                <p> 恭喜你获得 </p>
+            </div>
+            <div class="string2">
+                <p> 现金红包 </p>
+            </div>
+            <div class="string3">
+                <p class="timer count-title" id="count-number" data-to="0.5" data-speed="1500">
+                    <span>元</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="btnBg">
+            <img class="btn" src="http://yun1.janesi.net/web-test/zhiquFuli/icon/invite_code_hongbao_atn@2x.png" />
+            <div class="btnTitle" onclick="openUrl()">
+                <p>去收徒赚钱</p>
+            </div>
+        </div>
+        <div class="footerProfile">
+            <p>偷偷告诉你，收徒越多赚的越多哦！！！</p>
+        </div>
+    </div>
+</body>
+<script src="http://yun.janesi.net/web-test/zhiqu-web/js/jquery-2.1.1.min.js"></script>
+<script src="http://yun1.janesi.net/web-test/zhiquFuli/js/count.js"></script>
+
+<script>
+    function openUrl() {
+
+        var urlJson = {
+            'url': 'http://yun1.janesi.net/web-test/zhiquFuli/templete/teacherAndPupil.html'
+        }
+        var strategic = JSON.stringify(urlJson);
+        window.android.PupilLinkAndroid(strategic);
+    }
+</script>
+
+</html>

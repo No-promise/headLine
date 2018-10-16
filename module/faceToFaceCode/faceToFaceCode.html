@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- <link href="./faceToFaceCode.css" rel="stylesheet" /> -->
+    <link href="http://yun1.janesi.net/web-test/zhiquFuli/css/faceToFaceCode.css" rel="stylesheet" />
+
+
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+    <title>奖励邀请</title>
+</head>
+
+<body class="reset">
+
+    <div class="f_wrapper">
+
+        <img class="headerBg" src="http://yun1.janesi.net/web-test/zhiquFuli/icon/face_to_face_title.png" />
+        <div class="codeBgContainer">
+            <img class="codeBg" id="k_codeBg" src="http://yun1.janesi.net/web-test/zhiquFuli/icon/face_to_face_hongbao_bg@2x.png" />
+            <div class="qrcodeBg">
+
+                <div class="qrcodeWhiteBg" id="k_qrcodeWhiteBg">
+
+                    <div class="qrcode" id="qrcode"></div>
+                </div>
+            </div>
+        </div>
+        <img class="footerBg" src="http://yun1.janesi.net/web-test/zhiquFuli/icon/face_to_face_process@2x.png" />
+        <div class="temp"> </div>
+    </div>
+</body>
+<script src="http://yun.janesi.net/web-test/zhiqu-web/js/jquery-2.1.1.min.js"></script>
+<script>
+    var url = 'http://118.25.10.151:8090';
+    var appId = '10010';
+    var userId = '968';
+    // 获取公参：
+    window.android.updateRemark("ok");
+
+    // publicListParams();
+
+    function publicListParams(listPara) {
+        var val = JSON.parse(listPara)
+        appId = val.appId;
+        userId = val.userId;
+        url = val.url;
+        fetData();
+    };
+
+    function fetData() {
+        $.ajax({
+            type: 'post',
+            data: {
+                userId: userId,
+                appId: appId,
+                type: 'F2F'
+            },
+            url: url + '/app/interest/invite/share',
+            success: function (res) {
+
+                var k_codeBg = document.getElementById("k_codeBg");
+                var height = k_codeBg.offsetHeight/2;
+                var qrcode = new QRCode(document.getElementById("qrcode"), {
+                    width: height,
+                    height: height
+                });
+                qrcode.makeCode(res.result.link);
+            }
+        })
+    }
+</script>
+
+
+</html>
